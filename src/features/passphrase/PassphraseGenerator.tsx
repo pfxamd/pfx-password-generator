@@ -177,7 +177,9 @@ export function PassphraseGenerator() {
           {parsed.duplicateCount > 0 ? (
             <p className={form.note}>
               {parsed.duplicateCount}{" "}
-              {parsed.duplicateCount === 1 ? "duplicate ignored" : "duplicates ignored"}
+              {parsed.duplicateCount === 1
+                ? "duplicate ignored"
+                : "duplicates ignored"}
             </p>
           ) : null}
         </section>
