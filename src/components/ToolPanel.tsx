@@ -13,6 +13,10 @@ export function ToolPanel() {
       aria-label="Generator"
       data-testid="tool-panel-container"
     >
+      <div className={styles.header} data-testid="tool-panel-header">
+        <span className={styles.version}>v0.1.0</span>
+      </div>
+
       <div
         className={styles.viewport}
         id="generator-panel"

@@ -7,6 +7,21 @@
   box-shadow: var(--shadow);
 }
 
+.header {
+  min-height: 68px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid var(--line);
+}
+
+.version {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .viewport {
   min-height: 0;
 }
@@ -15,11 +30,18 @@
   .container {
     height: calc(100dvh - 120px);
     min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    min-height: 58px;
+    flex: 0 0 58px;
   }
 
   .viewport {
-    height: 100%;
     min-height: 0;
+    flex: 1 1 auto;
     overflow: auto;
     overscroll-behavior: contain;
     scrollbar-width: thin;
@@ -30,5 +52,10 @@
 @media (max-width: 620px) {
   .container {
     border-radius: 24px;
+  }
+
+  .header {
+    min-height: 52px;
+    padding-inline: 14px;
   }
 }
