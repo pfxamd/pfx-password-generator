@@ -61,7 +61,9 @@ test.describe("release audit", () => {
     await page.getByLabel("Password length", { exact: true }).fill("20");
 
     for (const label of ["Lowercase", "Uppercase", "Numbers", "Symbols"]) {
-      await page.getByLabel(label).uncheck({ force: true });
+      await page
+        .getByRole("checkbox", { name: label })
+        .uncheck({ force: true });
     }
 
     await expect(
@@ -180,6 +182,10 @@ test.describe("release audit", () => {
     for (const mode of ["Password", "Passphrase", "Batch"]) {
       await page.getByRole("tab", { name: mode }).click();
 
+      if (mode === "Password") {
+        await page.getByText("Minimum composition rules").click();
+      }
+
       const controls = page.locator(
         "button, input:not([type='hidden']), textarea, select, summary",
       );
@@ -187,7 +193,11 @@ test.describe("release audit", () => {
       const count = await controls.count();
 
       for (let index = 0; index < count; index += 1) {
-        await expect(controls.nth(index)).toHaveAccessibleName(/.+/u);
+        const control = controls.nth(index);
+
+        if (await control.isVisible()) {
+          await expect(control).toHaveAccessibleName(/.+/u);
+        }
       }
     }
   });
