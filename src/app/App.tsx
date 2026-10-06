@@ -15,7 +15,7 @@ export function App() {
         <a
           className={styles.brand}
           href={import.meta.env.BASE_URL}
-          aria-label="PFx Password Generator"
+          aria-label="PFx Password Lab Beta 0.1"
         >
           <img
             className={styles.brandLogo}
@@ -23,7 +23,10 @@ export function App() {
             alt=""
             aria-hidden="true"
           />
-          <span className={styles.brandName}>Password Generator</span>
+          <span className={styles.brandIdentity}>
+            <span className={styles.brandName}>PFx Password Lab</span>
+            <span className={styles.betaBadge}>Beta 0.1</span>
+          </span>
         </a>
 
         <span className={styles.localBadge}>
@@ -36,7 +39,7 @@ export function App() {
         <section className={styles.showcase} aria-labelledby="page-title">
           <div>
             <p className={styles.kicker}>Private by design</p>
-            <h1 id="page-title">Password Generator</h1>
+            <h1 id="page-title">PFx Password Lab</h1>
             <p className={styles.lead}>
               Create strong random passwords in your browser. Nothing is sent
               anywhere.

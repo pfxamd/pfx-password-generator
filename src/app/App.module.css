@@ -34,10 +34,34 @@
   object-fit: contain;
 }
 
+.brandIdentity {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
 .brandName {
   font-size: 15px;
   font-weight: 800;
   letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.betaBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 0, 20, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 0, 20, 0.08);
+  color: #d90a1d;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .localBadge {
@@ -376,8 +400,18 @@
     min-height: 60px;
   }
 
+  .brandIdentity {
+    gap: 7px;
+  }
+
   .brandName {
     font-size: 14px;
+  }
+
+  .betaBadge {
+    min-height: 22px;
+    padding-inline: 7px;
+    font-size: 9px;
   }
 
   .localBadge {
