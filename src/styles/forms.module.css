@@ -75,11 +75,7 @@
   margin: 0;
   appearance: none;
   border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    var(--accent) 0 14%,
-    #dedbd4 14% 100%
-  );
+  background: #dedbd4;
   outline: none;
 }
 
