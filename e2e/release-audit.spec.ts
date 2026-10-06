@@ -13,7 +13,7 @@ test.describe("release audit", () => {
 
     await page.getByRole("button", { name: "Regenerate" }).click();
 
-    await expect.poll(async () => output.textContent()).not.toBe(before);
+    await expect.poll(async () => output.inputValue()).not.toBe(before);
 
     const entropyValue = page
       .getByText("Generation entropy", { exact: true })
@@ -43,6 +43,30 @@ test.describe("release audit", () => {
 
     expect(storage).toEqual({ local: 0, session: 0 });
     expect(requests).toEqual([]);
+  });
+
+  test("long passwords stay single-line at a fixed field height", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1536, height: 864 });
+    await page.goto("/");
+
+    const output = page.getByTestId("secret-output");
+    const initialHeight = await output.evaluate(
+      (element) => element.getBoundingClientRect().height,
+    );
+
+    await page.getByLabel("Password length", { exact: true }).fill("512");
+    await expect(output).toHaveValue(/^.{512}$/u);
+
+    const geometry = await output.evaluate((element) => ({
+      height: element.getBoundingClientRect().height,
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+    }));
+
+    expect(geometry.height).toBe(initialHeight);
+    expect(geometry.scrollWidth).toBeGreaterThan(geometry.clientWidth);
   });
 
   test("password invalid states are rejected visibly", async ({ page }) => {
