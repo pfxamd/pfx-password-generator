@@ -7,7 +7,7 @@ interface ToolTabsProps {
   onChange: (value: ToolMode) => void;
 }
 
-const modes: ReadonlyArray<{ value: ToolMode; label: string }> = [
+const modes: readonly { value: ToolMode; label: string }[] = [
   { value: "password", label: "Password" },
   { value: "passphrase", label: "Passphrase" },
   { value: "batch", label: "Batch" },
