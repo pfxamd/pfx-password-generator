@@ -200,6 +200,37 @@ test.describe("release audit", () => {
     expect(clipboardValue.split("\n")).toHaveLength(5);
   });
 
+  test("generator mode controls live in the centered top bar", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1536, height: 864 });
+    await page.goto("/");
+
+    const topBar = page.getByTestId("top-bar");
+    const tabs = page.getByTestId("generator-mode-tabs");
+    const toolPanel = page.getByTestId("tool-panel-container");
+
+    await expect(topBar.getByTestId("generator-mode-tabs")).toHaveCount(1);
+    await expect(toolPanel.getByRole("tablist")).toHaveCount(0);
+
+    const tabsBox = await tabs.boundingBox();
+
+    if (!tabsBox) {
+      throw new Error("Generator mode navigation geometry is unavailable.");
+    }
+
+    const tabsCenter = tabsBox.x + tabsBox.width / 2;
+    expect(Math.abs(tabsCenter - 1536 / 2)).toBeLessThanOrEqual(1);
+
+    await page.getByRole("tab", { name: "Batch" }).click();
+    await expect(page.getByLabel("count")).toBeVisible();
+
+    await page.getByRole("tab", { name: "Password" }).click();
+    await expect(
+      page.getByLabel("Password length", { exact: true }),
+    ).toBeVisible();
+  });
+
   test("tabs follow keyboard navigation semantics", async ({ page }) => {
     await page.goto("/");
 

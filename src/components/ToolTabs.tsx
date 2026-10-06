@@ -1,8 +1,7 @@
 import type { KeyboardEvent } from "react";
 
+import type { ToolMode } from "../features/generator-mode/GeneratorModeContext";
 import styles from "./ToolTabs.module.css";
-
-export type ToolMode = "password" | "passphrase" | "batch";
 
 interface ToolTabsProps {
   value: ToolMode;
@@ -59,7 +58,12 @@ export function ToolTabs({ value, onChange }: ToolTabsProps) {
   }
 
   return (
-    <div className={styles.tabs} role="tablist" aria-label="Generator mode">
+    <div
+      className={styles.tabs}
+      role="tablist"
+      aria-label="Generator mode"
+      data-testid="generator-mode-tabs"
+    >
       {modes.map((mode, index) => (
         <button
           id={`generator-tab-${mode.value}`}
@@ -69,7 +73,7 @@ export function ToolTabs({ value, onChange }: ToolTabsProps) {
           type="button"
           role="tab"
           aria-selected={value === mode.value}
-          aria-controls={`generator-panel-${mode.value}`}
+          aria-controls="generator-panel"
           tabIndex={value === mode.value ? 0 : -1}
           onClick={() => onChange(mode.value)}
           onKeyDown={(event) => handleKeyDown(event, index)}

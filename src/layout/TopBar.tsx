@@ -1,6 +1,10 @@
+import { ToolTabs } from "../components/ToolTabs";
+import { useGeneratorMode } from "../features/generator-mode/GeneratorModeContext";
 import styles from "./TopBar.module.css";
 
 export function TopBar() {
+  const { mode, setMode } = useGeneratorMode();
+
   return (
     <header className={styles.topBar} data-testid="top-bar">
       <a
@@ -19,6 +23,10 @@ export function TopBar() {
           <span className={styles.betaBadge}>Beta 0.1</span>
         </span>
       </a>
+
+      <nav className={styles.modeNavigation} aria-label="Generator modes">
+        <ToolTabs value={mode} onChange={setMode} />
+      </nav>
 
       <span className={styles.localBadge}>
         <span aria-hidden="true" />

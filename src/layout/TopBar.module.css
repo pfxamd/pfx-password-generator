@@ -2,15 +2,17 @@
   width: min(1320px, calc(100% - 48px));
   min-height: 72px;
   margin-inline: auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
   gap: 24px;
 }
 
 .brand {
+  min-width: 0;
   display: inline-flex;
   align-items: center;
+  justify-self: start;
   gap: 12px;
   color: var(--text);
   text-decoration: none;
@@ -20,14 +22,15 @@
   display: block;
   width: 42px;
   height: 42px;
+  flex: 0 0 auto;
   object-fit: contain;
 }
 
 .brandIdentity {
+  min-width: 0;
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  min-width: 0;
 }
 
 .brandName {
@@ -53,13 +56,20 @@
   white-space: nowrap;
 }
 
+.modeNavigation {
+  min-width: 0;
+  justify-self: center;
+}
+
 .localBadge {
   display: inline-flex;
   align-items: center;
+  justify-self: end;
   gap: 8px;
   color: var(--muted);
   font-size: 13px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .localBadge > span {
@@ -79,6 +89,25 @@
 @media (max-width: 900px) {
   .topBar {
     width: min(100% - 24px, 860px);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand local"
+      "modes modes";
+    gap: 10px 18px;
+    padding-block: 10px;
+  }
+
+  .brand {
+    grid-area: brand;
+  }
+
+  .modeNavigation {
+    grid-area: modes;
+    justify-self: center;
+  }
+
+  .localBadge {
+    grid-area: local;
   }
 }
 
@@ -86,6 +115,7 @@
   .topBar {
     width: min(100% - 20px, 860px);
     min-height: 60px;
+    gap: 9px 12px;
   }
 
   .brandIdentity {
@@ -104,5 +134,9 @@
 
   .localBadge {
     font-size: 12px;
+  }
+
+  .modeNavigation {
+    width: 100%;
   }
 }

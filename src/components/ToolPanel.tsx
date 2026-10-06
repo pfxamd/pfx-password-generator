@@ -1,13 +1,11 @@
-import { useState } from "react";
-
 import { BatchGenerator } from "../features/batch/BatchGenerator";
+import { useGeneratorMode } from "../features/generator-mode/GeneratorModeContext";
 import { PassphraseGenerator } from "../features/passphrase/PassphraseGenerator";
 import { PasswordGenerator } from "../features/password/PasswordGenerator";
-import { ToolTabs, type ToolMode } from "./ToolTabs";
 import styles from "./ToolPanel.module.css";
 
 export function ToolPanel() {
-  const [mode, setMode] = useState<ToolMode>("password");
+  const { mode } = useGeneratorMode();
 
   return (
     <section
@@ -15,16 +13,11 @@ export function ToolPanel() {
       aria-label="Generator"
       data-testid="tool-panel-container"
     >
-      <div className={styles.header}>
-        <ToolTabs value={mode} onChange={setMode} />
-        <span className={styles.version}>v0.1.0</span>
-      </div>
-
       <div
         className={styles.viewport}
-        id={"generator-panel-" + mode}
+        id="generator-panel"
         role="tabpanel"
-        aria-labelledby={"generator-tab-" + mode}
+        aria-labelledby={`generator-tab-${mode}`}
         tabIndex={0}
         data-testid="tool-panel-viewport"
       >
