@@ -237,9 +237,7 @@ test.describe("release audit", () => {
       throw new Error("Secret field geometry is unavailable.");
     }
 
-    await page
-      .getByLabel("Password length", { exact: true })
-      .fill("4096");
+    await page.getByLabel("Password length", { exact: true }).fill("4096");
 
     await expect
       .poll(async () => (await output.inputValue()).length)
