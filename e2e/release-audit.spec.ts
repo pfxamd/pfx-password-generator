@@ -33,7 +33,7 @@ test.describe("release audit", () => {
     );
     expect(clipboardValue).toBe(copiedValue);
 
-    await page.getByLabel("Password length").fill("10");
+    await page.getByLabel("Password length", { exact: true }).fill("10");
     await expect(output).toHaveText(/^.{10}$/u);
 
     const storage = await page.evaluate(() => ({
@@ -48,17 +48,17 @@ test.describe("release audit", () => {
   test("password invalid states are rejected visibly", async ({ page }) => {
     await page.goto("/");
 
-    await page.getByLabel("Password length").fill("0");
+    await page.getByLabel("Password length", { exact: true }).fill("0");
     await expect(
       page.getByRole("alert").getByText(/between 1 and 4096/u),
     ).toBeVisible();
 
-    await page.getByLabel("Password length").fill("4097");
+    await page.getByLabel("Password length", { exact: true }).fill("4097");
     await expect(
       page.getByRole("alert").getByText(/between 1 and 4096/u),
     ).toBeVisible();
 
-    await page.getByLabel("Password length").fill("20");
+    await page.getByLabel("Password length", { exact: true }).fill("20");
 
     for (const label of ["Lowercase", "Uppercase", "Numbers", "Symbols"]) {
       await page.getByLabel(label).uncheck({ force: true });
@@ -74,7 +74,7 @@ test.describe("release audit", () => {
   }) => {
     await page.goto("/");
 
-    await page.getByLabel("Password length").fill("2");
+    await page.getByLabel("Password length", { exact: true }).fill("2");
     await page.getByText("Minimum composition rules").click();
     await page.getByLabel("Lowercase minimum").fill("2");
     await page.getByLabel("Uppercase minimum").fill("2");
