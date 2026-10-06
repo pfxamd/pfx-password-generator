@@ -88,3 +88,16 @@ summary:focus-visible,
   background: rgba(99, 91, 255, 0.18);
   color: var(--text);
 }
+
+
+@media (min-width: 821px) and (min-height: 720px) {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    overflow: hidden;
+  }
+}
