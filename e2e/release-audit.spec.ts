@@ -16,7 +16,7 @@ test.describe("release audit", () => {
     await expect.poll(async () => output.textContent()).not.toBe(before);
 
     const entropyValue = page
-      .getByText("entropy", { exact: true })
+      .getByText("Generation entropy", { exact: true })
       .locator("..")
       .locator("strong");
     await expect(entropyValue).toContainText("bits");
