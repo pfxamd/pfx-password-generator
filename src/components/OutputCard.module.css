@@ -133,3 +133,31 @@
     font-size: 23px;
   }
 }
+
+
+@media (min-width: 821px) and (min-height: 720px) {
+  .card {
+    margin: 18px 22px;
+    border-radius: 18px;
+  }
+
+  .header {
+    min-height: 46px;
+    padding-inline: 18px 14px;
+  }
+
+  .action,
+  .copy {
+    min-height: 34px;
+  }
+
+  .value,
+  .error {
+    min-height: 104px;
+    padding: 20px 24px 22px;
+  }
+
+  .value {
+    font-size: clamp(24px, 3vw, 34px);
+  }
+}
