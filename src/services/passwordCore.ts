@@ -1,6 +1,7 @@
 import {
   analyzePasswordGenerationEntropy,
   generatePassword,
+  generatePasswordBatch,
 } from "pfx-password-core";
 
 import type {
@@ -20,4 +21,11 @@ export function createPasswordSnapshot(
     value: generatePassword(options),
     entropy: analyzePasswordGenerationEntropy(options),
   };
+}
+
+export function createPasswordBatch(
+  count: number,
+  options: PasswordGenerationOptions,
+): readonly string[] {
+  return generatePasswordBatch(count, options);
 }

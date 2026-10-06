@@ -1,27 +1,39 @@
 # pfx-password-generator
 
-Open-source web app for secure password and passphrase generation, powered by
-`pfx-password-core`.
+Open-source browser app for secure password and passphrase generation, powered
+by `pfx-password-core`.
 
-## Foundation
+## Current application
 
-- React + TypeScript + Vite
-- `pfx-password-core` pinned to `v0.1.1`
-- local-only secret generation
-- no telemetry, analytics, persistence, or server dependency for generation
-- Vitest unit coverage
-- Playwright browser smoke coverage
-- ESLint + Prettier
+- password generation with configurable character sets and exclusions;
+- exact generation entropy and search-space display;
+- caller-supplied passphrase wordlists with local text-file loading;
+- bounded batch password generation;
+- copy and regenerate controls;
+- responsive dark interface;
+- no accounts, telemetry, secret persistence, or generation server.
 
-The current UI is intentionally minimal. The repository is being established
-and verified before interface design work begins.
+Security-sensitive generation and entropy logic remain in
+`pfx-password-core v0.1.1`. The application layer does not reimplement the
+random sampler.
+
+## Stack
+
+- React 19
+- TypeScript 5.9
+- Vite 8
+- CSS Modules
+- Vitest
+- Playwright
+- ESLint
+- Prettier
 
 ## Development
 
 Requires Node.js 22.13 or newer and npm 11.
 
 ```bash
-npm install
+npm ci
 npm run check
 npm run test:e2e
 ```
@@ -38,11 +50,14 @@ src/
   services/
   styles/
   types/
+  utils/
 ```
 
-Application components do not implement password-generation algorithms. The
-security-sensitive generation and entropy logic is delegated to
-`pfx-password-core`.
+## Privacy model
+
+Generated secrets stay in the active browser context. The app does not include
+analytics, telemetry, secret history, account storage, or a server dependency
+for generation.
 
 ## License
 

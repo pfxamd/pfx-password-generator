@@ -1,16 +1,40 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { createPasswordSnapshot } from "../services/passwordCore";
+import {
+  createPasswordSnapshot,
+  type PasswordSnapshot,
+} from "../services/passwordCore";
 import type { PasswordGenerationOptions } from "../types/password";
 
+interface GeneratorState {
+  snapshot: PasswordSnapshot | null;
+  error: string | null;
+}
+
+function run(options: PasswordGenerationOptions): GeneratorState {
+  try {
+    return {
+      snapshot: createPasswordSnapshot(options),
+      error: null,
+    };
+  } catch (error) {
+    return {
+      snapshot: null,
+      error: error instanceof Error ? error.message : "Generation failed.",
+    };
+  }
+}
+
 export function usePasswordGenerator(options: PasswordGenerationOptions) {
-  const [snapshot, setSnapshot] = useState(() =>
-    createPasswordSnapshot(options),
-  );
+  const [state, setState] = useState<GeneratorState>(() => run(options));
 
   const regenerate = useCallback(() => {
-    setSnapshot(createPasswordSnapshot(options));
+    setState(run(options));
   }, [options]);
 
-  return { snapshot, regenerate };
+  useEffect(() => {
+    regenerate();
+  }, [regenerate]);
+
+  return { ...state, regenerate };
 }
