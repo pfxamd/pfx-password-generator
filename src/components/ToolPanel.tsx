@@ -10,18 +10,23 @@ export function ToolPanel() {
   const [mode, setMode] = useState<ToolMode>("password");
 
   return (
-    <section className={styles.tool} aria-label="Generator">
-      <div className={styles.toolHeader}>
+    <section
+      className={styles.container}
+      aria-label="Generator"
+      data-testid="tool-panel-container"
+    >
+      <div className={styles.header}>
         <ToolTabs value={mode} onChange={setMode} />
         <span className={styles.version}>v0.1.0</span>
       </div>
 
       <div
-        className={styles.toolPanel}
+        className={styles.viewport}
         id={"generator-panel-" + mode}
         role="tabpanel"
         aria-labelledby={"generator-tab-" + mode}
         tabIndex={0}
+        data-testid="tool-panel-viewport"
       >
         {mode === "password" ? <PasswordGenerator /> : null}
         {mode === "passphrase" ? <PassphraseGenerator /> : null}

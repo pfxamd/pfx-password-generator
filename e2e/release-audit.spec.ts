@@ -286,6 +286,62 @@ test.describe("release audit", () => {
     expect(overflow.scrollWidth).toBeGreaterThan(overflow.clientWidth);
   });
 
+  test("tool panel container keeps fixed geometry across modes and oversized content", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1536, height: 864 });
+    await page.goto("/");
+
+    const container = page.getByTestId("tool-panel-container");
+    const viewport = page.getByTestId("tool-panel-viewport");
+    const initialBox = await container.boundingBox();
+
+    if (!initialBox) {
+      throw new Error("Tool panel geometry is unavailable.");
+    }
+
+    for (const mode of ["Password", "Passphrase", "Batch"]) {
+      await page.getByRole("tab", { name: mode }).click();
+
+      const modeBox = await container.boundingBox();
+
+      if (!modeBox) {
+        throw new Error(`${mode} tool panel geometry is unavailable.`);
+      }
+
+      expect(Math.abs(modeBox.height - initialBox.height)).toBeLessThanOrEqual(
+        1,
+      );
+      expect(Math.abs(modeBox.width - initialBox.width)).toBeLessThanOrEqual(1);
+    }
+
+    await viewport.evaluate((element) => {
+      const oversized = document.createElement("div");
+      oversized.dataset.testid = "oversized-tool-content";
+      oversized.style.height = "5000px";
+      element.append(oversized);
+    });
+
+    const oversizedBox = await container.boundingBox();
+
+    if (!oversizedBox) {
+      throw new Error("Oversized tool panel geometry is unavailable.");
+    }
+
+    expect(Math.abs(oversizedBox.height - initialBox.height)).toBeLessThanOrEqual(
+      1,
+    );
+
+    const overflow = await viewport.evaluate((element) => ({
+      clientHeight: element.clientHeight,
+      scrollHeight: element.scrollHeight,
+      overflowY: getComputedStyle(element).overflowY,
+    }));
+
+    expect(overflow.scrollHeight).toBeGreaterThan(overflow.clientHeight);
+    expect(overflow.overflowY).toBe("auto");
+  });
+
   test("desktop modes stay within the viewport without page scrolling", async ({
     page,
   }) => {
