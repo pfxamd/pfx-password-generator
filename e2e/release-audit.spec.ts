@@ -16,7 +16,7 @@ test.describe("release audit", () => {
     await expect.poll(async () => output.textContent()).not.toBe(before);
 
     const entropyValue = page
-      .getByText("Generation entropy")
+      .getByText("entropy", { exact: true })
       .locator("..")
       .locator("strong");
     await expect(entropyValue).toContainText("bits");
@@ -100,10 +100,8 @@ test.describe("release audit", () => {
       ),
     });
 
-    await expect(page.getByText("6 unique")).toBeVisible();
-    await expect(
-      page.getByText("1 duplicate ignored"),
-    ).toBeVisible();
+    await expect(page.getByText("6 unique words")).toBeVisible();
+    await expect(page.getByText("1 duplicate ignored")).toBeVisible();
     await expect(page.getByTestId("secret-output")).toContainText("-");
 
     await page.getByLabel("Separator").fill("");
@@ -126,28 +124,28 @@ test.describe("release audit", () => {
     await page.goto("/");
     await page.getByRole("tab", { name: "Batch" }).click();
 
-    const count = page.getByLabel("Count");
+    const count = page.getByLabel("count");
 
     await count.fill("0");
-    await page.getByRole("button", { name: "Generate batch" }).click();
+    await page.getByRole("button", { name: "generate batch" }).click();
     await expect(
       page.getByRole("alert").getByText(/between 1 and 10000/u),
     ).toBeVisible();
 
     await count.fill("10001");
-    await page.getByRole("button", { name: "Generate batch" }).click();
+    await page.getByRole("button", { name: "generate batch" }).click();
     await expect(
       page.getByRole("alert").getByText(/between 1 and 10000/u),
     ).toBeVisible();
 
     await count.fill("5");
-    await page.getByRole("button", { name: "Generate batch" }).click();
+    await page.getByRole("button", { name: "generate batch" }).click();
 
     const results = page.getByRole("list", { name: "Generated passwords" });
     await expect(results.locator("li")).toHaveCount(5);
 
-    await page.getByRole("button", { name: "Copy all" }).click();
-    await expect(page.getByRole("button", { name: "Copied" })).toBeVisible();
+    await page.getByRole("button", { name: "copy all" }).click();
+    await expect(page.getByRole("button", { name: "copied" })).toBeVisible();
 
     const clipboardValue = await page.evaluate(() =>
       navigator.clipboard.readText(),
