@@ -1,37 +1,33 @@
 .card {
-  min-height: 88px;
-  padding: 13px 14px;
-  border-top: 1px solid var(--line-strong);
-  background: transparent;
+  min-height: 104px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
 }
 
-.card:last-child {
-  border-bottom: 1px solid var(--line-strong);
+.card:first-child {
+  padding-top: 0;
 }
 
 .label {
   display: block;
   margin-bottom: 7px;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .value {
   display: block;
   color: var(--text);
-  font-family: var(--mono);
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
 }
 
 .detail {
   display: block;
   margin-top: 5px;
-  color: var(--dim);
-  font-size: 10px;
+  color: var(--muted);
+  font-size: 12px;
   line-height: 1.45;
 }

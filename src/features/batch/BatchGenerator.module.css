@@ -6,13 +6,14 @@
 
 .results {
   overflow: hidden;
-  border: 1px solid var(--line-strong);
-  background: #090b0d;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
 }
 
 .resultsHeader {
-  min-height: 38px;
-  padding: 0 10px 0 13px;
+  min-height: 58px;
+  padding: 0 16px 0 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,42 +22,35 @@
 }
 
 .resultsTitle {
-  color: var(--accent);
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.resultsTitle::before {
-  content: "output/";
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .resultsCount {
   margin-left: 8px;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 9px;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .copyAll {
-  min-height: 26px;
-  padding: 0 8px;
-  border: 0;
-  background: transparent;
-  color: var(--accent);
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-soft);
+  color: var(--text);
   cursor: pointer;
-  font-family: var(--mono);
-  font-size: 9px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .copyAll:hover {
-  background: var(--surface-hover);
-  color: var(--text);
+  border-color: var(--line-strong);
 }
 
 .copyAll:disabled {
-  color: var(--dim);
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
@@ -69,17 +63,17 @@
 }
 
 .list li {
-  min-height: 34px;
-  padding: 7px 12px;
+  min-height: 44px;
+  padding: 9px 16px;
   display: grid;
-  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-columns: 34px minmax(0, 1fr);
   gap: 8px;
   align-items: center;
   border-bottom: 1px solid var(--line);
 }
 
 .list li:hover {
-  background: var(--surface);
+  background: var(--surface-soft);
 }
 
 .list li:last-child {
@@ -87,26 +81,24 @@
 }
 
 .list span {
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 9px;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .list code {
   overflow-wrap: anywhere;
   color: var(--text);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .empty,
 .error {
-  min-height: 100px;
+  min-height: 110px;
   margin: 0;
-  padding: 26px 14px;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 10px;
+  padding: 28px 18px;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .error {

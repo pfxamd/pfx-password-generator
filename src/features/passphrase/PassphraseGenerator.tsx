@@ -32,158 +32,156 @@ export function PassphraseGenerator() {
   }
 
   return (
-    <div className={form.toolGrid}>
-      <div className={form.primary}>
-        <OutputCard
-          label="passphrase"
-          value={snapshot?.value ?? ""}
-          error={error}
-          onRegenerate={regenerate}
-        />
+    <>
+      <OutputCard
+        label="Generated passphrase"
+        value={snapshot?.value ?? ""}
+        error={error}
+        onRegenerate={regenerate}
+      />
 
-        <section className={form.panel}>
-          <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>wordlist</h2>
-            <p className={form.panelHint}>{parsed.words.length} unique words</p>
-          </div>
+      <div className={form.toolGrid}>
+        <div className={form.primary}>
+          <section className={form.panel}>
+            <div className={form.panelHeader}>
+              <h2 className={form.panelTitle}>Wordlist</h2>
+              <p className={form.panelHint}>
+                Paste one word per line or load a local text file.
+              </p>
+            </div>
 
-          <div className={form.field}>
-            <label className={form.fieldLabel} htmlFor="wordlist">
-              words · one per line
-            </label>
-            <textarea
-              id="wordlist"
-              className={form.textarea}
-              value={wordlistText}
-              placeholder={"alpha\nbravo\ncharlie\ndelta\necho\nfoxtrot"}
-              onChange={(event) => setWordlistText(event.target.value)}
-            />
-            <label className={form.fieldLabel} htmlFor="wordlist-file">
-              load local text file
-            </label>
-            <input
-              id="wordlist-file"
-              className={form.fileInput}
-              type="file"
-              accept=".txt,text/plain"
-              onChange={(event) => void loadFile(event.target.files?.[0])}
-            />
-          </div>
-        </section>
-
-        <section className={form.panel}>
-          <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>input</h2>
-          </div>
-
-          <div className={form.minimumGrid}>
-            <label className={form.field}>
-              <span className={form.fieldLabel}>word count</span>
+            <div className={form.field}>
+              <label className={form.fieldLabel} htmlFor="wordlist">
+                <span>Words</span>
+                <span>{parsed.words.length} unique</span>
+              </label>
+              <textarea
+                id="wordlist"
+                className={form.textarea}
+                value={wordlistText}
+                placeholder={"alpha\nbravo\ncharlie\ndelta\necho\nfoxtrot"}
+                onChange={(event) => setWordlistText(event.target.value)}
+              />
+              <label className={form.fieldLabel} htmlFor="wordlist-file">
+                Load local text file
+              </label>
               <input
-                id="word-count"
-                className={form.input}
-                type="number"
-                aria-label="Word count"
-                min="1"
-                max="4096"
-                value={options.wordCount}
-                onChange={(event) =>
-                  setOptions((current) => ({
-                    ...current,
-                    wordCount: Number(event.target.value),
-                  }))
-                }
-              />
-            </label>
-
-            <label className={form.field}>
-              <span className={form.fieldLabel}>separator</span>
-              <input
-                id="separator"
-                className={form.input}
-                type="text"
-                aria-label="Separator"
-                value={options.separator}
-                onChange={(event) =>
-                  setOptions((current) => ({
-                    ...current,
-                    separator: event.target.value,
-                  }))
-                }
-              />
-            </label>
-          </div>
-
-          <div className={form.field}>
-            <div className={form.toggleGrid}>
-              <Toggle
-                label="Capitalize"
-                checked={options.capitalize ?? false}
-                onChange={(value) =>
-                  setOptions((current) => ({
-                    ...current,
-                    capitalize: value,
-                  }))
-                }
-              />
-              <Toggle
-                label="Include number"
-                checked={options.includeNumber ?? false}
-                onChange={(value) =>
-                  setOptions((current) => ({
-                    ...current,
-                    includeNumber: value,
-                  }))
-                }
-              />
-              <Toggle
-                label="Include symbol"
-                checked={options.includeSymbol ?? false}
-                onChange={(value) =>
-                  setOptions((current) => ({
-                    ...current,
-                    includeSymbol: value,
-                  }))
-                }
+                id="wordlist-file"
+                className={form.fileInput}
+                type="file"
+                accept=".txt,text/plain"
+                onChange={(event) => void loadFile(event.target.files?.[0])}
               />
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
 
-      <aside className={form.sidebar} aria-label="Passphrase diagnostics">
-        <div className={form.metricGrid}>
-          <MetricCard
-            label="entropy"
-            value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
-          />
-          <MetricCard
-            label="search space"
-            value={
-              snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
-            }
-          />
+          <section className={form.panel}>
+            <div className={form.panelHeader}>
+              <h2 className={form.panelTitle}>Options</h2>
+            </div>
+
+            <div className={form.minimumGrid}>
+              <label className={form.field}>
+                <span className={form.fieldLabel}>Word count</span>
+                <input
+                  className={form.input}
+                  type="number"
+                  aria-label="Word count"
+                  min="1"
+                  max="4096"
+                  value={options.wordCount}
+                  onChange={(event) =>
+                    setOptions((current) => ({
+                      ...current,
+                      wordCount: Number(event.target.value),
+                    }))
+                  }
+                />
+              </label>
+
+              <label className={form.field}>
+                <span className={form.fieldLabel}>Separator</span>
+                <input
+                  className={form.input}
+                  type="text"
+                  aria-label="Separator"
+                  value={options.separator}
+                  onChange={(event) =>
+                    setOptions((current) => ({
+                      ...current,
+                      separator: event.target.value,
+                    }))
+                  }
+                />
+              </label>
+            </div>
+
+            <div className={form.field}>
+              <div className={form.toggleGrid}>
+                <Toggle
+                  label="Capitalize"
+                  checked={options.capitalize ?? false}
+                  onChange={(value) =>
+                    setOptions((current) => ({
+                      ...current,
+                      capitalize: value,
+                    }))
+                  }
+                />
+                <Toggle
+                  label="Include number"
+                  checked={options.includeNumber ?? false}
+                  onChange={(value) =>
+                    setOptions((current) => ({
+                      ...current,
+                      includeNumber: value,
+                    }))
+                  }
+                />
+                <Toggle
+                  label="Include symbol"
+                  checked={options.includeSymbol ?? false}
+                  onChange={(value) =>
+                    setOptions((current) => ({
+                      ...current,
+                      includeSymbol: value,
+                    }))
+                  }
+                />
+              </div>
+            </div>
+          </section>
         </div>
 
-        <section className={form.panel}>
-          <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>wordlist state</h2>
+        <aside className={form.sidebar} aria-label="Passphrase details">
+          <div className={form.metricGrid}>
+            <MetricCard
+              label="Generation entropy"
+              value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
+            />
+            <MetricCard
+              label="Search space"
+              value={
+                snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
+              }
+            />
           </div>
+
           <p className={form.note}>
-            source <span className={form.noteStrong}>local input</span>
-            <br />
-            bundled list <span className={form.noteStrong}>none</span>
+            Wordlists stay local. The app ships with{" "}
+            <span className={form.noteStrong}>no bundled list</span>.
           </p>
+
           {parsed.duplicateCount > 0 ? (
             <p className={form.note}>
               {parsed.duplicateCount}{" "}
               {parsed.duplicateCount === 1
-                ? "duplicate ignored"
-                : "duplicates ignored"}
+                ? "duplicate entry ignored"
+                : "duplicate entries ignored"}
             </p>
           ) : null}
-        </section>
-      </aside>
-    </div>
+        </aside>
+      </div>
+    </>
   );
 }

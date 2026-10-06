@@ -32,185 +32,182 @@ export function PasswordGenerator() {
   }
 
   return (
-    <div className={form.toolGrid}>
-      <div className={form.primary}>
-        <OutputCard
-          label="password"
-          value={snapshot?.value ?? ""}
-          error={error}
-          onRegenerate={regenerate}
-        />
+    <>
+      <OutputCard
+        label="Generated password"
+        value={snapshot?.value ?? ""}
+        error={error}
+        onRegenerate={regenerate}
+      />
 
-        <section className={form.panel}>
-          <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>input</h2>
-            <p className={form.panelHint}>changes regenerate immediately</p>
-          </div>
+      <div className={form.toolGrid}>
+        <div className={form.primary}>
+          <section className={form.panel}>
+            <div className={form.panelHeader}>
+              <h2 className={form.panelTitle}>Customize</h2>
+              <p className={form.panelHint}>
+                Adjust the password without leaving the page.
+              </p>
+            </div>
 
-          <div className={form.field}>
-            <label className={form.fieldLabel} htmlFor="password-length">
-              <span>length</span>
-              <span>1..4096</span>
-            </label>
-            <div className={form.rangeRow}>
-              <input
-                className={form.range}
-                type="range"
-                min="4"
-                max="128"
-                value={Math.min(options.length, 128)}
-                aria-label="Password length slider"
-                onChange={(event) =>
-                  setNumber("length", Number(event.target.value))
-                }
+            <div className={form.field}>
+              <label className={form.fieldLabel} htmlFor="password-length">
+                <span>Password length</span>
+                <span>1–4096</span>
+              </label>
+              <div className={form.rangeRow}>
+                <input
+                  className={form.range}
+                  type="range"
+                  min="4"
+                  max="128"
+                  value={Math.min(options.length, 128)}
+                  aria-label="Password length slider"
+                  onChange={(event) =>
+                    setNumber("length", Number(event.target.value))
+                  }
+                />
+                <input
+                  id="password-length"
+                  className={form.input}
+                  type="number"
+                  min="1"
+                  max="4096"
+                  value={options.length}
+                  aria-label="Password length"
+                  onChange={(event) =>
+                    setNumber("length", Number(event.target.value))
+                  }
+                />
+              </div>
+            </div>
+
+            <div className={form.field}>
+              <span className={form.fieldLabel}>Characters</span>
+              <div className={form.toggleGrid}>
+                <Toggle
+                  label="Lowercase"
+                  description="a–z"
+                  checked={options.lowercase}
+                  onChange={(value) => setBoolean("lowercase", value)}
+                />
+                <Toggle
+                  label="Uppercase"
+                  description="A–Z"
+                  checked={options.uppercase}
+                  onChange={(value) => setBoolean("uppercase", value)}
+                />
+                <Toggle
+                  label="Numbers"
+                  description="0–9"
+                  checked={options.digits}
+                  onChange={(value) => setBoolean("digits", value)}
+                />
+                <Toggle
+                  label="Symbols"
+                  description="! @ # $ % …"
+                  checked={options.symbols}
+                  onChange={(value) => setBoolean("symbols", value)}
+                />
+              </div>
+            </div>
+
+            <div className={form.field}>
+              <Toggle
+                label="Avoid ambiguous characters"
+                description="Removes 0 O 1 l I"
+                checked={options.excludeAmbiguous ?? false}
+                onChange={(value) => setBoolean("excludeAmbiguous", value)}
               />
+            </div>
+
+            <div className={form.field}>
+              <label className={form.fieldLabel} htmlFor="excluded-characters">
+                Exclude specific characters
+              </label>
               <input
-                id="password-length"
+                id="excluded-characters"
                 className={form.input}
-                type="number"
-                min="1"
-                max="4096"
-                value={options.length}
-                aria-label="Password length"
+                type="text"
+                value={options.excludedCharacters ?? ""}
+                placeholder={"Example: {}[]\"'"}
                 onChange={(event) =>
-                  setNumber("length", Number(event.target.value))
+                  setOptions((current) => ({
+                    ...current,
+                    excludedCharacters: event.target.value,
+                  }))
                 }
               />
             </div>
-          </div>
 
-          <div className={form.field}>
-            <span className={form.fieldLabel}>alphabet</span>
-            <div className={form.toggleGrid}>
-              <Toggle
-                label="Lowercase"
-                description="a-z"
-                checked={options.lowercase}
-                onChange={(value) => setBoolean("lowercase", value)}
-              />
-              <Toggle
-                label="Uppercase"
-                description="A-Z"
-                checked={options.uppercase}
-                onChange={(value) => setBoolean("uppercase", value)}
-              />
-              <Toggle
-                label="Numbers"
-                description="0-9"
-                checked={options.digits}
-                onChange={(value) => setBoolean("digits", value)}
-              />
-              <Toggle
-                label="Symbols"
-                description="printable ASCII"
-                checked={options.symbols}
-                onChange={(value) => setBoolean("symbols", value)}
-              />
-            </div>
-          </div>
-
-          <div className={form.field}>
-            <Toggle
-              label="Exclude ambiguous"
-              description="0 O 1 l I"
-              checked={options.excludeAmbiguous ?? false}
-              onChange={(value) => setBoolean("excludeAmbiguous", value)}
-            />
-          </div>
-
-          <div className={form.field}>
-            <label className={form.fieldLabel} htmlFor="excluded-characters">
-              exclude characters
-            </label>
-            <input
-              id="excluded-characters"
-              className={form.input}
-              type="text"
-              value={options.excludedCharacters ?? ""}
-              placeholder={"{}[]\"'"}
-              onChange={(event) =>
-                setOptions((current) => ({
-                  ...current,
-                  excludedCharacters: event.target.value,
-                }))
-              }
-            />
-          </div>
-
-          <details className={form.details}>
-            <summary className={form.summary}>minimum composition</summary>
-            <div className={form.minimumGrid}>
-              {[
-                ["minLowercase", "Lowercase minimum", options.lowercase],
-                ["minUppercase", "Uppercase minimum", options.uppercase],
-                ["minDigits", "Number minimum", options.digits],
-                ["minSymbols", "Symbol minimum", options.symbols],
-              ].map(([key, label, enabled]) => (
-                <label className={form.field} key={String(key)}>
-                  <span className={form.fieldLabel}>{String(label)}</span>
-                  <input
-                    className={form.input}
-                    type="number"
-                    aria-label={String(label)}
-                    min="0"
-                    max={options.length}
-                    disabled={!enabled}
-                    value={
-                      options[
-                        key as
-                          | "minLowercase"
-                          | "minUppercase"
-                          | "minDigits"
-                          | "minSymbols"
-                      ] ?? 0
-                    }
-                    onChange={(event) =>
-                      setNumber(
-                        key as
-                          | "minLowercase"
-                          | "minUppercase"
-                          | "minDigits"
-                          | "minSymbols",
-                        Number(event.target.value),
-                      )
-                    }
-                  />
-                </label>
-              ))}
-            </div>
-          </details>
-        </section>
-      </div>
-
-      <aside className={form.sidebar} aria-label="Generation diagnostics">
-        <div className={form.metricGrid}>
-          <MetricCard
-            label="entropy"
-            value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
-            detail="exact generation entropy"
-          />
-          <MetricCard
-            label="search space"
-            value={
-              snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
-            }
-            detail="exact combinations"
-          />
+            <details className={form.details}>
+              <summary className={form.summary}>Advanced composition rules</summary>
+              <div className={form.minimumGrid}>
+                {[
+                  ["minLowercase", "Lowercase minimum", options.lowercase],
+                  ["minUppercase", "Uppercase minimum", options.uppercase],
+                  ["minDigits", "Number minimum", options.digits],
+                  ["minSymbols", "Symbol minimum", options.symbols],
+                ].map(([key, label, enabled]) => (
+                  <label className={form.field} key={String(key)}>
+                    <span className={form.fieldLabel}>{String(label)}</span>
+                    <input
+                      className={form.input}
+                      type="number"
+                      aria-label={String(label)}
+                      min="0"
+                      max={options.length}
+                      disabled={!enabled}
+                      value={
+                        options[
+                          key as
+                            | "minLowercase"
+                            | "minUppercase"
+                            | "minDigits"
+                            | "minSymbols"
+                        ] ?? 0
+                      }
+                      onChange={(event) =>
+                        setNumber(
+                          key as
+                            | "minLowercase"
+                            | "minUppercase"
+                            | "minDigits"
+                            | "minSymbols",
+                          Number(event.target.value),
+                        )
+                      }
+                    />
+                  </label>
+                ))}
+              </div>
+            </details>
+          </section>
         </div>
 
-        <section className={form.panel}>
-          <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>runtime</h2>
+        <aside className={form.sidebar} aria-label="Generation details">
+          <div className={form.metricGrid}>
+            <MetricCard
+              label="Generation entropy"
+              value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
+              detail="Calculated from the exact generation space"
+            />
+            <MetricCard
+              label="Search space"
+              value={
+                snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
+              }
+              detail="Exact combinations"
+            />
           </div>
+
           <p className={form.note}>
-            source <span className={form.noteStrong}>Web Crypto</span>
-            <br />
-            scope <span className={form.noteStrong}>this tab</span>
-            <br />
-            persistence <span className={form.noteStrong}>none</span>
+            Generated locally with{" "}
+            <span className={form.noteStrong}>Web Crypto</span>. Nothing is sent
+            or saved.
           </p>
-        </section>
-      </aside>
-    </div>
+        </aside>
+      </div>
+    </>
   );
 }

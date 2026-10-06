@@ -1,22 +1,35 @@
 .row {
   position: relative;
-  min-height: 42px;
-  padding: 8px 0;
+  min-height: 68px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  border-bottom: 1px solid var(--line);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
   cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
 }
 
-.row:first-child {
-  border-top: 1px solid var(--line);
+.row:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+.row:has(.input:checked) {
+  border-color: rgba(99, 91, 255, 0.35);
+  background: var(--accent-soft);
 }
 
 .row[data-disabled="true"] {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: not-allowed;
+  transform: none;
 }
 
 .label,
@@ -26,15 +39,14 @@
 
 .label {
   color: var(--text);
-  font-family: var(--mono);
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: 750;
 }
 
 .description {
-  margin-top: 2px;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 9px;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .input {
@@ -46,33 +58,34 @@
 .track {
   position: relative;
   flex: 0 0 auto;
-  width: 16px;
-  height: 16px;
-  border: 1px solid var(--line-strong);
-  background: var(--bg);
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: #d9d7d1;
+  transition: background 150ms ease;
 }
 
 .thumb {
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 8px;
-  height: 5px;
-  border-right: 1px solid transparent;
-  border-bottom: 1px solid transparent;
-  transform: rotate(45deg);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+  transition: transform 150ms ease;
 }
 
 .input:checked + .track {
-  border-color: var(--accent);
-  background: var(--accent-quiet);
+  background: var(--accent);
 }
 
 .input:checked + .track .thumb {
-  border-color: var(--accent);
+  transform: translateX(18px);
 }
 
 .input:focus-visible + .track {
-  outline: 1px solid var(--focus);
+  outline: 3px solid rgba(99, 91, 255, 0.18);
   outline-offset: 3px;
 }

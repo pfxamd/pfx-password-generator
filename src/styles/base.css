@@ -7,26 +7,33 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  color: #e8eaed;
-  background: #0b0d0f;
-  color-scheme: dark;
+  color: #17181b;
+  background: #f3f1ec;
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 
-  --bg: #0b0d0f;
-  --surface: #0f1215;
-  --surface-raised: #13171b;
-  --surface-hover: #171c21;
-  --line: #20252b;
-  --line-strong: #343b43;
-  --text: #e8eaed;
-  --muted: #9aa2ab;
-  --dim: #69727c;
-  --accent: #8ff0c8;
-  --accent-quiet: rgba(143, 240, 200, 0.09);
-  --danger: #ff9a9a;
-  --focus: #8fc9ff;
+  --bg: #f3f1ec;
+  --surface: #ffffff;
+  --surface-soft: #f7f6f3;
+  --surface-hover: #efeee9;
+  --line: #e5e2da;
+  --line-strong: #d3cfc4;
+  --text: #17181b;
+  --muted: #73777f;
+  --muted-strong: #555a63;
+  --accent: #635bff;
+  --accent-strong: #5048e5;
+  --accent-soft: #eeecff;
+  --accent-ink: #352db1;
+  --good: #19a075;
+  --danger: #c83a52;
+  --output: #17181b;
+  --output-muted: #a8adb8;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --shadow:
+    0 24px 70px rgba(28, 25, 18, 0.08),
+    0 2px 10px rgba(28, 25, 18, 0.035);
 }
 
 * {
@@ -34,18 +41,16 @@
 }
 
 html {
-  background: var(--bg);
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(99, 91, 255, 0.09), transparent 26rem),
+    var(--bg);
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    var(--bg);
-  background-size: 32px 32px;
 }
 
 button,
@@ -72,11 +77,11 @@ textarea:focus-visible,
 select:focus-visible,
 summary:focus-visible,
 [role="tabpanel"]:focus-visible {
-  outline: 1px solid var(--focus);
+  outline: 3px solid rgba(99, 91, 255, 0.2);
   outline-offset: 3px;
 }
 
 ::selection {
-  background: rgba(143, 240, 200, 0.22);
+  background: rgba(99, 91, 255, 0.18);
   color: var(--text);
 }

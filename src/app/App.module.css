@@ -6,13 +6,81 @@
 
 .topbar,
 .workspace,
-.statusbar {
-  width: min(1120px, calc(100% - 32px));
+.footer {
+  width: min(960px, calc(100% - 32px));
   margin-inline: auto;
 }
 
 .topbar {
-  min-height: 58px;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brandMark {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: var(--text);
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.brandName {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.localBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.localBadge > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--good);
+  box-shadow: 0 0 0 4px rgba(25, 160, 117, 0.11);
+}
+
+.workspace {
+  display: flex;
+  align-items: flex-start;
+  padding: 28px 0 56px;
+}
+
+.tool {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.toolHeader {
+  min-height: 72px;
+  padding: 0 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,125 +88,64 @@
   border-bottom: 1px solid var(--line);
 }
 
-.brand {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 10px;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.brand h1 {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.prompt {
-  color: var(--accent);
-  font-family: var(--mono);
+.version {
+  color: var(--muted);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 650;
 }
 
-.runtime {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.runtime span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.runtime i {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.workspace {
-  padding-block: 42px 48px;
-}
-
-.commandbar {
-  min-height: 42px;
+.footer {
+  min-height: 66px;
+  padding: 18px 0 24px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 20px;
-  border-bottom: 1px solid var(--line-strong);
-}
-
-.version {
-  padding-bottom: 11px;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.03em;
-  white-space: nowrap;
-}
-
-.toolStage {
-  outline: none;
-}
-
-.statusbar {
-  min-height: 44px;
-  padding-block: 13px;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  border-top: 1px solid var(--line);
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.03em;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 @media (max-width: 680px) {
   .topbar,
   .workspace,
-  .statusbar {
-    width: min(100% - 24px, 1120px);
+  .footer {
+    width: min(100% - 20px, 960px);
   }
 
   .topbar {
-    min-height: 52px;
+    min-height: 64px;
   }
 
-  .brand h1 {
+  .brandName {
+    font-size: 14px;
+  }
+
+  .localBadge {
     font-size: 12px;
   }
 
-  .runtime span:last-child {
-    display: none;
-  }
-
   .workspace {
-    padding-block: 26px 36px;
+    padding-top: 14px;
   }
 
-  .commandbar {
-    align-items: center;
+  .tool {
+    border-radius: 22px;
+  }
+
+  .toolHeader {
+    min-height: auto;
+    padding: 14px;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .version {
     display: none;
   }
 
-  .statusbar {
+  .footer {
     flex-direction: column;
-    gap: 4px;
+    align-items: flex-start;
+    gap: 6px;
   }
 }

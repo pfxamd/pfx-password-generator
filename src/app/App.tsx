@@ -17,43 +17,39 @@ export function App() {
           href={import.meta.env.BASE_URL}
           aria-label="PFx Password Generator"
         >
-          <span className={styles.prompt} aria-hidden="true">
-            ~/pfx
-          </span>
-          <h1>password generator</h1>
+          <span className={styles.brandMark}>PFx</span>
+          <span className={styles.brandName}>Password Generator</span>
         </a>
 
-        <div className={styles.runtime} aria-label="Runtime status">
-          <span>
-            <i aria-hidden="true" />
-            local
-          </span>
-          <span>web crypto</span>
-        </div>
+        <span className={styles.localBadge}>
+          <span aria-hidden="true" />
+          Runs locally
+        </span>
       </header>
 
       <main className={styles.workspace}>
-        <div className={styles.commandbar}>
-          <ToolTabs value={mode} onChange={setMode} />
-          <span className={styles.version}>app 0.1.0 · core 0.1.1</span>
-        </div>
+        <section className={styles.tool}>
+          <div className={styles.toolHeader}>
+            <ToolTabs value={mode} onChange={setMode} />
+            <span className={styles.version}>v0.1.0</span>
+          </div>
 
-        <div
-          className={styles.toolStage}
-          id={`generator-panel-${mode}`}
-          role="tabpanel"
-          aria-labelledby={`generator-tab-${mode}`}
-          tabIndex={0}
-        >
-          {mode === "password" ? <PasswordGenerator /> : null}
-          {mode === "passphrase" ? <PassphraseGenerator /> : null}
-          {mode === "batch" ? <BatchGenerator /> : null}
-        </div>
+          <div
+            id={`generator-panel-${mode}`}
+            role="tabpanel"
+            aria-labelledby={`generator-tab-${mode}`}
+            tabIndex={0}
+          >
+            {mode === "password" ? <PasswordGenerator /> : null}
+            {mode === "passphrase" ? <PassphraseGenerator /> : null}
+            {mode === "batch" ? <BatchGenerator /> : null}
+          </div>
+        </section>
       </main>
 
-      <footer className={styles.statusbar}>
-        <span>client-side only</span>
-        <span>no history · no telemetry · no secret storage</span>
+      <footer className={styles.footer}>
+        <span>Powered by pfx-password-core v0.1.1</span>
+        <span>No accounts · No telemetry · No secret storage</span>
       </footer>
     </div>
   );
