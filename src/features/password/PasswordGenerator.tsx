@@ -73,6 +73,7 @@ export function PasswordGenerator() {
                 min="1"
                 max="4096"
                 value={options.length}
+                aria-label="Password length"
                 onChange={(event) =>
                   setNumber("length", Number(event.target.value))
                 }
