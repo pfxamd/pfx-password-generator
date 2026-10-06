@@ -260,3 +260,76 @@
     grid-template-columns: minmax(0, 1fr) 78px;
   }
 }
+
+
+@media (min-width: 821px) and (min-height: 720px) {
+  .toolGrid {
+    min-height: 0;
+    gap: 28px;
+    padding: 0 22px 18px;
+  }
+
+  .primary {
+    gap: 18px;
+  }
+
+  .sidebar {
+    padding-top: 2px;
+  }
+
+  .panel {
+    padding-top: 0;
+  }
+
+  .panel + .panel {
+    padding-top: 4px;
+  }
+
+  .panelHeader {
+    margin-bottom: 12px;
+  }
+
+  .panelTitle {
+    font-size: 17px;
+  }
+
+  .panelHint {
+    margin-top: 3px;
+  }
+
+  .field {
+    gap: 7px;
+  }
+
+  .field + .field {
+    margin-top: 14px;
+  }
+
+  .input,
+  .select {
+    min-height: 40px;
+  }
+
+  .textarea {
+    min-height: 142px;
+  }
+
+  .toggleGrid {
+    gap: 8px;
+  }
+
+  .details {
+    margin-top: 14px;
+    padding-top: 12px;
+  }
+
+  .minimumGrid {
+    margin-top: 12px;
+    gap: 9px;
+  }
+
+  .metricGrid .card {
+    min-height: 88px;
+    padding-block: 14px;
+  }
+}
