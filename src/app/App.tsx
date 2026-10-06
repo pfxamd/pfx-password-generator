@@ -18,7 +18,7 @@ export function App() {
           aria-label="PFx Password Generator"
         >
           <span className={styles.brandMark}>PFx</span>
-          <span className={styles.brandName}>Password Generator</span>
+          <h1 className={styles.brandName}>Password Generator</h1>
         </a>
 
         <span className={styles.localBadge}>
