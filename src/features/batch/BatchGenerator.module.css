@@ -110,3 +110,18 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+@media (min-width: 821px) and (min-height: 720px) {
+  .results {
+    min-height: 0;
+  }
+
+  .resultsHeader {
+    min-height: 48px;
+  }
+
+  .list {
+    max-height: min(360px, calc(100dvh - 390px));
+  }
+}
