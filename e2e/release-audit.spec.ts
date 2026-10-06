@@ -200,6 +200,24 @@ test.describe("release audit", () => {
     }
   });
 
+  test("desktop modes stay within the viewport without page scrolling", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1536, height: 864 });
+    await page.goto("/");
+
+    for (const mode of ["Password", "Passphrase", "Batch"]) {
+      await page.getByRole("tab", { name: mode }).click();
+
+      const dimensions = await page.evaluate(() => ({
+        viewport: window.innerHeight,
+        content: document.documentElement.scrollHeight,
+      }));
+
+      expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
+    }
+  });
+
   test("mobile layouts do not overflow horizontally", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");
