@@ -4,7 +4,7 @@ test("password mode generates in the browser", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "password generator" }),
+    page.getByRole("heading", { name: "PFx Password Lab" }),
   ).toBeVisible();
 
   const output = page.getByTestId("secret-output");
@@ -24,7 +24,7 @@ test("password mode remains usable on a phone viewport", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "password generator" }),
+    page.getByRole("heading", { name: "PFx Password Lab" }),
   ).toBeVisible();
 
   await expect(page.getByTestId("secret-output")).toHaveValue(/^.{20}$/u);
