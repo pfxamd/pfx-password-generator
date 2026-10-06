@@ -27,7 +27,9 @@ test("passphrase mode accepts a local wordlist", async ({ page }) => {
   await expect(page.getByTestId("secret-output")).toContainText("-");
 });
 
-test("batch mode produces the requested number of results", async ({ page }) => {
+test("batch mode produces the requested number of results", async ({
+  page,
+}) => {
   await page.goto("/");
   await page.getByRole("tab", { name: "Batch" }).click();
 

@@ -39,7 +39,11 @@ export function OutputCard({
       <div className={styles.header}>
         <span>{label}</span>
         <div className={styles.actions}>
-          <button type="button" onClick={onRegenerate} className={styles.action}>
+          <button
+            type="button"
+            onClick={onRegenerate}
+            className={styles.action}
+          >
             Regenerate
           </button>
           <button

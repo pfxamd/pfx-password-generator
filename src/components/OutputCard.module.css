@@ -4,7 +4,11 @@
   border: 1px solid var(--border);
   border-radius: 18px;
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent 42%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 5%, transparent),
+      transparent 42%
+    ),
     var(--surface);
   box-shadow: var(--shadow-soft);
 }

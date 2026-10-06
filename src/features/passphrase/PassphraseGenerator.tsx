@@ -155,16 +155,12 @@ export function PassphraseGenerator() {
         <div className={form.metricGrid}>
           <MetricCard
             label="Generation entropy"
-            value={
-              snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"
-            }
+            value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
           />
           <MetricCard
             label="Search space"
             value={
-              snapshot
-                ? formatCombinations(snapshot.entropy.combinations)
-                : "—"
+              snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
             }
           />
         </div>

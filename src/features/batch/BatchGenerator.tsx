@@ -126,7 +126,11 @@ export function BatchGenerator() {
           </div>
 
           <div className={form.field}>
-            <button className={form.primaryButton} type="button" onClick={generate}>
+            <button
+              className={form.primaryButton}
+              type="button"
+              onClick={generate}
+            >
               Generate batch
             </button>
           </div>

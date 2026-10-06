@@ -25,11 +25,7 @@ export function PasswordGenerator() {
 
   function setNumber(
     key:
-      | "length"
-      | "minLowercase"
-      | "minUppercase"
-      | "minDigits"
-      | "minSymbols",
+      "length" | "minLowercase" | "minUppercase" | "minDigits" | "minSymbols",
     value: number,
   ) {
     setOptions((current) => ({ ...current, [key]: value }));
@@ -142,7 +138,9 @@ export function PasswordGenerator() {
           </div>
 
           <details className={form.details}>
-            <summary className={form.summary}>Minimum composition rules</summary>
+            <summary className={form.summary}>
+              Minimum composition rules
+            </summary>
             <div className={form.minimumGrid}>
               {[
                 ["minLowercase", "Lowercase minimum", options.lowercase],
@@ -189,17 +187,13 @@ export function PasswordGenerator() {
         <div className={form.metricGrid}>
           <MetricCard
             label="Generation entropy"
-            value={
-              snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"
-            }
+            value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
             detail="Calculated from the exact generation space."
           />
           <MetricCard
             label="Search space"
             value={
-              snapshot
-                ? formatCombinations(snapshot.entropy.combinations)
-                : "—"
+              snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
             }
             detail="Exact combinations before display formatting."
           />
