@@ -29,35 +29,25 @@
 }
 
 .resultRow {
+  min-width: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
   align-items: stretch;
 }
 
-.value,
 .error {
-  min-height: 78px;
+  width: 100%;
+  min-width: 0;
+  height: 78px;
   margin: 0;
   padding: 0 20px;
   display: flex;
   align-items: center;
+  overflow: auto;
   border: 1px solid var(--line-strong);
   border-radius: 18px;
   background: white;
-}
-
-.value {
-  overflow-wrap: anywhere;
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: clamp(22px, 2.3vw, 31px);
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.025em;
-}
-
-.error {
   color: var(--danger);
   font-size: 14px;
   line-height: 1.5;
@@ -103,9 +93,8 @@
     gap: 10px;
   }
 
-  .value,
   .error {
-    min-height: 70px;
+    height: 70px;
   }
 
   .copy {
@@ -119,17 +108,12 @@
   }
 
   .resultRow {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .value,
   .error {
-    min-height: 82px;
-    padding: 18px;
-  }
-
-  .value {
-    font-size: 21px;
+    height: 82px;
+    padding: 0 18px;
   }
 
   .copy {

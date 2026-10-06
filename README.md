@@ -14,7 +14,7 @@ by `pfx-password-core`.
 - caller-supplied passphrase wordlists with local text-file loading;
 - bounded batch password generation;
 - copy and regenerate controls;
-- responsive dark interface;
+- responsive visual interface;
 - no accounts, telemetry, secret persistence, or generation server.
 
 Security-sensitive generation and entropy logic remain in
@@ -56,6 +56,17 @@ src/
   types/
   utils/
 ```
+
+## UI invariants
+
+Generated passwords and passphrases are rendered through the shared
+`SecretField` component. It is intentionally a fixed-height, single-line,
+read-only text field. Long secrets remain on one line and overflow horizontally;
+they must never wrap, increase the field height, or change the surrounding
+layout geometry.
+
+The browser release audit verifies this invariant with the maximum supported
+password length.
 
 ## Privacy model
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { SecretField } from "./SecretField";
 import styles from "./OutputCard.module.css";
 
 interface OutputCardProps {
@@ -53,13 +54,7 @@ export function OutputCard({
             {error}
           </p>
         ) : (
-          <output
-            className={styles.value}
-            data-testid="secret-output"
-            aria-label={label}
-          >
-            {value}
-          </output>
+          <SecretField label={label} value={value} />
         )}
 
         <button

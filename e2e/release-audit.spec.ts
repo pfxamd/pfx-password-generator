@@ -9,7 +9,7 @@ test.describe("release audit", () => {
     await page.goto("/");
 
     const output = page.getByTestId("secret-output");
-    const before = await output.textContent();
+    const before = await output.inputValue();
 
     await page.getByRole("button", { name: "Regenerate" }).click();
 
@@ -24,7 +24,7 @@ test.describe("release audit", () => {
     const requests: string[] = [];
     page.on("request", (request) => requests.push(request.url()));
 
-    const copiedValue = await output.textContent();
+    const copiedValue = await output.inputValue();
     await page.getByRole("button", { name: "Copy" }).click();
     await expect(page.getByRole("button", { name: "Copied" })).toBeVisible();
 
@@ -34,7 +34,7 @@ test.describe("release audit", () => {
     expect(clipboardValue).toBe(copiedValue);
 
     await page.getByLabel("Password length", { exact: true }).fill("10");
-    await expect(output).toHaveText(/^.{10}$/u);
+    await expect(output).toHaveValue(/^.{10}$/u);
 
     const storage = await page.evaluate(() => ({
       local: localStorage.length,
@@ -102,7 +102,7 @@ test.describe("release audit", () => {
 
     await expect(page.getByText("6 unique")).toBeVisible();
     await expect(page.getByText("1 duplicate entry ignored")).toBeVisible();
-    await expect(page.getByTestId("secret-output")).toContainText("-");
+    await expect(page.getByTestId("secret-output")).toHaveValue(/-/u);
 
     await page.getByLabel("Separator").fill("");
     await expect(
@@ -198,6 +198,42 @@ test.describe("release audit", () => {
         }
       }
     }
+  });
+
+  test("generated secret field keeps fixed geometry for very long values", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1536, height: 864 });
+    await page.goto("/");
+
+    const output = page.getByTestId("secret-output");
+    const initialBox = await output.boundingBox();
+
+    expect(initialBox).not.toBeNull();
+
+    await page
+      .getByLabel("Password length", { exact: true })
+      .fill("4096");
+
+    await expect
+      .poll(async () => (await output.inputValue()).length)
+      .toBe(4096);
+
+    const longBox = await output.boundingBox();
+    expect(longBox).not.toBeNull();
+
+    expect(Math.abs(longBox!.height - initialBox!.height)).toBeLessThanOrEqual(1);
+    expect(Math.abs(longBox!.width - initialBox!.width)).toBeLessThanOrEqual(1);
+
+    const overflow = await output.evaluate((element) => ({
+      clientHeight: element.clientHeight,
+      scrollHeight: element.scrollHeight,
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+    }));
+
+    expect(overflow.scrollHeight).toBeLessThanOrEqual(overflow.clientHeight);
+    expect(overflow.scrollWidth).toBeGreaterThan(overflow.clientWidth);
   });
 
   test("desktop modes stay within the viewport without page scrolling", async ({

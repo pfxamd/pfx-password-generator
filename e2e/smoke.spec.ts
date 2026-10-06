@@ -8,10 +8,10 @@ test("password mode generates in the browser", async ({ page }) => {
   ).toBeVisible();
 
   const output = page.getByTestId("secret-output");
-  await expect(output).toHaveText(/^.{20}$/u);
+  await expect(output).toHaveValue(/^.{20}$/u);
 
   await page.getByRole("button", { name: "Regenerate" }).click();
-  await expect(output).toHaveText(/^.{20}$/u);
+  await expect(output).toHaveValue(/^.{20}$/u);
 
   await page.screenshot({
     path: "test-results/password-desktop.png",
@@ -27,7 +27,7 @@ test("password mode remains usable on a phone viewport", async ({ page }) => {
     page.getByRole("heading", { name: "password generator" }),
   ).toBeVisible();
 
-  await expect(page.getByTestId("secret-output")).toHaveText(/^.{20}$/u);
+  await expect(page.getByTestId("secret-output")).toHaveValue(/^.{20}$/u);
 
   await page.screenshot({
     path: "test-results/password-mobile.png",
@@ -43,7 +43,7 @@ test("passphrase mode accepts a local wordlist", async ({ page }) => {
     .getByLabel("Words")
     .fill("alpha\nbravo\ncharlie\ndelta\necho\nfoxtrot");
 
-  await expect(page.getByTestId("secret-output")).toContainText("-");
+  await expect(page.getByTestId("secret-output")).toHaveValue(/-/u);
 });
 
 test("batch mode produces the requested number of results", async ({
