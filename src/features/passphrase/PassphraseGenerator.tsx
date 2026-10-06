@@ -62,7 +62,11 @@ export function PassphraseGenerator() {
               placeholder={"alpha\nbravo\ncharlie\ndelta\necho\nfoxtrot"}
               onChange={(event) => setWordlistText(event.target.value)}
             />
+            <label className={form.fieldLabel} htmlFor="wordlist-file">
+              Load text file
+            </label>
             <input
+              id="wordlist-file"
               className={form.fileInput}
               type="file"
               accept=".txt,text/plain"
@@ -175,7 +179,11 @@ export function PassphraseGenerator() {
           </p>
           {parsed.duplicateCount > 0 ? (
             <p className={form.note}>
-              {parsed.duplicateCount} duplicate entries were ignored.
+              {parsed.duplicateCount}{" "}
+              {parsed.duplicateCount === 1
+                ? "duplicate entry was"
+                : "duplicate entries were"}{" "}
+              ignored.
             </p>
           ) : null}
         </section>

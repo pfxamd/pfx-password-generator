@@ -51,6 +51,7 @@ export function OutputCard({
             onClick={copy}
             className={styles.copy}
             disabled={!value}
+            aria-live="polite"
           >
             {copyState === "copied"
               ? "Copied"
@@ -62,9 +63,15 @@ export function OutputCard({
       </div>
 
       {error ? (
-        <p className={styles.error}>{error}</p>
+        <p className={styles.error} role="alert">
+          {error}
+        </p>
       ) : (
-        <output className={styles.value} data-testid="secret-output">
+        <output
+          className={styles.value}
+          data-testid="secret-output"
+          aria-label={label}
+        >
           {value}
         </output>
       )}

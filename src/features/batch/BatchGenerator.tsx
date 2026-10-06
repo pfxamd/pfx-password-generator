@@ -147,17 +147,22 @@ export function BatchGenerator() {
               className={styles.copyAll}
               onClick={() => void copyAll()}
               disabled={values.length === 0}
+              aria-live="polite"
             >
               {copied ? "Copied" : "Copy all"}
             </button>
           </div>
 
-          {error ? <p className={styles.error}>{error}</p> : null}
+          {error ? (
+            <p className={styles.error} role="alert">
+              {error}
+            </p>
+          ) : null}
 
           {values.length === 0 && !error ? (
             <p className={styles.empty}>No batch generated yet.</p>
           ) : (
-            <ol className={styles.list}>
+            <ol className={styles.list} aria-label="Generated passwords">
               {values.map((value, index) => (
                 <li key={`${index}-${value}`}>
                   <span>{index + 1}</span>

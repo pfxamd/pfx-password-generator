@@ -25,7 +25,11 @@ export function PasswordGenerator() {
 
   function setNumber(
     key:
-      "length" | "minLowercase" | "minUppercase" | "minDigits" | "minSymbols",
+      | "length"
+      | "minLowercase"
+      | "minUppercase"
+      | "minDigits"
+      | "minSymbols",
     value: number,
   ) {
     setOptions((current) => ({ ...current, [key]: value }));
@@ -61,6 +65,7 @@ export function PasswordGenerator() {
                 min="4"
                 max="128"
                 value={Math.min(options.length, 128)}
+                aria-label="Password length slider"
                 onChange={(event) =>
                   setNumber("length", Number(event.target.value))
                 }

@@ -12,11 +12,7 @@ export function App() {
   return (
     <div className={styles.shell}>
       <header className={styles.header}>
-        <a
-          className={styles.brand}
-          href="/"
-          aria-label="PFx Password Generator"
-        >
+        <a className={styles.brand} href="/" aria-label="PFx Password Generator">
           <span className={styles.brandMark}>PFx</span>
           <span>Password Generator</span>
         </a>
@@ -30,9 +26,7 @@ export function App() {
       <main className={styles.main}>
         <section className={styles.intro} aria-labelledby="page-title">
           <p className={styles.eyebrow}>Secure generation toolkit</p>
-          <h1 id="page-title">
-            Generate secrets without sending them anywhere.
-          </h1>
+          <h1 id="page-title">Generate secrets without sending them anywhere.</h1>
           <p className={styles.lead}>
             Passwords and passphrases are generated in this browser with Web
             Crypto through pfx-password-core.
@@ -41,7 +35,13 @@ export function App() {
 
         <ToolTabs value={mode} onChange={setMode} />
 
-        <div className={styles.toolStage}>
+        <div
+          className={styles.toolStage}
+          id={`generator-panel-${mode}`}
+          role="tabpanel"
+          aria-labelledby={`generator-tab-${mode}`}
+          tabIndex={0}
+        >
           {mode === "password" ? <PasswordGenerator /> : null}
           {mode === "passphrase" ? <PassphraseGenerator /> : null}
           {mode === "batch" ? <BatchGenerator /> : null}
