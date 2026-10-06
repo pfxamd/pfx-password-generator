@@ -1,5 +1,9 @@
 # pfx-password-generator
 
+## Live
+
+https://pfxamd.github.io/pfx-password-generator/
+
 Open-source browser app for secure password and passphrase generation, powered
 by `pfx-password-core`.
 
