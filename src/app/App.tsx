@@ -17,7 +17,12 @@ export function App() {
           href={import.meta.env.BASE_URL}
           aria-label="PFx Password Generator"
         >
-          <span className={styles.brandMark}>PFx</span>
+          <img
+            className={styles.brandLogo}
+            src={import.meta.env.BASE_URL + "pfx-logo.svg"}
+            alt=""
+            aria-hidden="true"
+          />
           <span className={styles.brandName}>Password Generator</span>
         </a>
 
