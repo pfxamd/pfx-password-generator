@@ -328,9 +328,9 @@ test.describe("release audit", () => {
       throw new Error("Oversized tool panel geometry is unavailable.");
     }
 
-    expect(Math.abs(oversizedBox.height - initialBox.height)).toBeLessThanOrEqual(
-      1,
-    );
+    expect(
+      Math.abs(oversizedBox.height - initialBox.height),
+    ).toBeLessThanOrEqual(1);
 
     const overflow = await viewport.evaluate((element) => ({
       clientHeight: element.clientHeight,
