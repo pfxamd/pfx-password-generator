@@ -77,8 +77,12 @@ test.describe("release audit", () => {
     await previewTrigger.click();
 
     await expect(preview).toBeVisible();
-    await expect(page.getByText("512 characters", { exact: true })).toBeVisible();
-    await expect(page.getByTestId("secret-preview-value")).toHaveText(fullValue);
+    await expect(
+      page.getByText("512 characters", { exact: true }),
+    ).toBeVisible();
+    await expect(page.getByTestId("secret-preview-value")).toHaveText(
+      fullValue,
+    );
 
     await page.keyboard.press("Escape");
     await expect(preview).toBeHidden();

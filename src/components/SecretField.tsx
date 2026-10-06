@@ -124,7 +124,10 @@ export function SecretField({ label, value }: SecretFieldProps) {
           </button>
         </div>
 
-        <code className={styles.previewValue} data-testid="secret-preview-value">
+        <code
+          className={styles.previewValue}
+          data-testid="secret-preview-value"
+        >
           {value}
         </code>
       </div>
