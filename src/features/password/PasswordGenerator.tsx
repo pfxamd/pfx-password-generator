@@ -25,11 +25,7 @@ export function PasswordGenerator() {
 
   function setNumber(
     key:
-      | "length"
-      | "minLowercase"
-      | "minUppercase"
-      | "minDigits"
-      | "minSymbols",
+      "length" | "minLowercase" | "minUppercase" | "minDigits" | "minSymbols",
     value: number,
   ) {
     setOptions((current) => ({ ...current, [key]: value }));

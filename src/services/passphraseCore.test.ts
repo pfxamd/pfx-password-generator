@@ -1,10 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { DEFAULT_PASSPHRASE_OPTIONS } from "../config/passphrase";
-import {
-  createPassphraseSnapshot,
-  parseWordlist,
-} from "./passphraseCore";
+import { createPassphraseSnapshot, parseWordlist } from "./passphraseCore";
 
 describe("passphrase core integration", () => {
   it("normalizes a pasted wordlist and ignores duplicates", () => {

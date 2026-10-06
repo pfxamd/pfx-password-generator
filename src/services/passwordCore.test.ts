@@ -1,10 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { DEFAULT_PASSWORD_OPTIONS } from "../config/password";
-import {
-  createPasswordBatch,
-  createPasswordSnapshot,
-} from "./passwordCore";
+import { createPasswordBatch, createPasswordSnapshot } from "./passwordCore";
 
 describe("password core integration", () => {
   it("generates through pfx-password-core and reports entropy", () => {

@@ -13,11 +13,12 @@ test.describe("release audit", () => {
 
     await page.getByRole("button", { name: "Regenerate" }).click();
 
-    await expect
-      .poll(async () => output.textContent())
-      .not.toBe(before);
+    await expect.poll(async () => output.textContent()).not.toBe(before);
 
-    const entropyValue = page.getByText("Generation entropy").locator("..").locator("strong");
+    const entropyValue = page
+      .getByText("Generation entropy")
+      .locator("..")
+      .locator("strong");
     await expect(entropyValue).toContainText("bits");
 
     const requests: string[] = [];
@@ -27,7 +28,9 @@ test.describe("release audit", () => {
     await page.getByRole("button", { name: "Copy" }).click();
     await expect(page.getByRole("button", { name: "Copied" })).toBeVisible();
 
-    const clipboardValue = await page.evaluate(() => navigator.clipboard.readText());
+    const clipboardValue = await page.evaluate(() =>
+      navigator.clipboard.readText(),
+    );
     expect(clipboardValue).toBe(copiedValue);
 
     await page.getByLabel("Password length").fill("10");
@@ -96,7 +99,9 @@ test.describe("release audit", () => {
     });
 
     await expect(page.getByText("6 unique")).toBeVisible();
-    await expect(page.getByText("1 duplicate entry was ignored.")).toBeVisible();
+    await expect(
+      page.getByText("1 duplicate entry was ignored."),
+    ).toBeVisible();
     await expect(page.getByTestId("secret-output")).toContainText("-");
 
     await page.getByLabel("Separator").fill("");
@@ -142,7 +147,9 @@ test.describe("release audit", () => {
     await page.getByRole("button", { name: "Copy all" }).click();
     await expect(page.getByRole("button", { name: "Copied" })).toBeVisible();
 
-    const clipboardValue = await page.evaluate(() => navigator.clipboard.readText());
+    const clipboardValue = await page.evaluate(() =>
+      navigator.clipboard.readText(),
+    );
     expect(clipboardValue.split("\n")).toHaveLength(5);
   });
 
