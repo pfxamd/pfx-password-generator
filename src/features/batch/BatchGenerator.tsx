@@ -49,16 +49,13 @@ export function BatchGenerator() {
       <div className={form.primary}>
         <section className={form.panel}>
           <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>Batch settings</h2>
-            <p className={form.panelHint}>
-              Generate multiple independent results. Duplicate outputs are
-              preserved by design.
-            </p>
+            <h2 className={form.panelTitle}>batch input</h2>
+            <p className={form.panelHint}>max 10000 results</p>
           </div>
 
           <div className={styles.row}>
             <label className={form.field}>
-              <span className={form.fieldLabel}>Count</span>
+              <span className={form.fieldLabel}>count</span>
               <input
                 className={form.input}
                 type="number"
@@ -69,7 +66,7 @@ export function BatchGenerator() {
               />
             </label>
             <label className={form.field}>
-              <span className={form.fieldLabel}>Length</span>
+              <span className={form.fieldLabel}>length</span>
               <input
                 className={form.input}
                 type="number"
@@ -87,6 +84,7 @@ export function BatchGenerator() {
           </div>
 
           <div className={form.field}>
+            <span className={form.fieldLabel}>alphabet</span>
             <div className={form.toggleGrid}>
               <Toggle
                 label="Lowercase"
@@ -131,7 +129,7 @@ export function BatchGenerator() {
               type="button"
               onClick={generate}
             >
-              Generate batch
+              generate batch
             </button>
           </div>
         </section>
@@ -139,7 +137,7 @@ export function BatchGenerator() {
         <section className={styles.results}>
           <div className={styles.resultsHeader}>
             <div>
-              <span className={styles.resultsTitle}>Results</span>
+              <span className={styles.resultsTitle}>stdout</span>
               <span className={styles.resultsCount}>{values.length}</span>
             </div>
             <button
@@ -149,7 +147,7 @@ export function BatchGenerator() {
               disabled={values.length === 0}
               aria-live="polite"
             >
-              {copied ? "Copied" : "Copy all"}
+              {copied ? "copied" : "copy all"}
             </button>
           </div>
 
@@ -160,12 +158,12 @@ export function BatchGenerator() {
           ) : null}
 
           {values.length === 0 && !error ? (
-            <p className={styles.empty}>No batch generated yet.</p>
+            <p className={styles.empty}>$ waiting for input</p>
           ) : (
             <ol className={styles.list} aria-label="Generated passwords">
               {values.map((value, index) => (
                 <li key={`${index}-${value}`}>
-                  <span>{index + 1}</span>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
                   <code>{value}</code>
                 </li>
               ))}
@@ -174,14 +172,17 @@ export function BatchGenerator() {
         </section>
       </div>
 
-      <aside className={form.sidebar}>
+      <aside className={form.sidebar} aria-label="Batch diagnostics">
         <section className={form.panel}>
           <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>Isolation</h2>
+            <h2 className={form.panelTitle}>runtime</h2>
           </div>
           <p className={form.note}>
-            The core assigns an independent random-source object to each result
-            and does not deduplicate generated values.
+            duplicates <span className={form.noteStrong}>preserved</span>
+            <br />
+            persistence <span className={form.noteStrong}>none</span>
+            <br />
+            max count <span className={form.noteStrong}>10000</span>
           </p>
         </section>
       </aside>

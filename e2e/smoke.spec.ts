@@ -4,9 +4,7 @@ test("password mode generates in the browser", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", {
-      name: "Generate secrets without sending them anywhere.",
-    }),
+    page.getByRole("heading", { name: "password generator" }),
   ).toBeVisible();
 
   const output = page.getByTestId("secret-output");
@@ -26,9 +24,7 @@ test("password mode remains usable on a phone viewport", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", {
-      name: "Generate secrets without sending them anywhere.",
-    }),
+    page.getByRole("heading", { name: "password generator" }),
   ).toBeVisible();
 
   await expect(page.getByTestId("secret-output")).toHaveText(/^.{20}$/u);
@@ -57,7 +53,7 @@ test("batch mode produces the requested number of results", async ({
   await page.getByRole("tab", { name: "Batch" }).click();
 
   await page.getByLabel("Count").fill("5");
-  await page.getByRole("button", { name: "Generate batch" }).click();
+  await page.getByRole("button", { name: "generate batch" }).click();
 
   await expect(page.locator("ol li")).toHaveCount(5);
 });

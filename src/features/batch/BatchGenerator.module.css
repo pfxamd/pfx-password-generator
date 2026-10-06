@@ -6,51 +6,62 @@
 
 .results {
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  background: #090b0d;
 }
 
 .resultsHeader {
-  padding: 16px 18px;
+  min-height: 38px;
+  padding: 0 10px 0 13px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
 }
 
 .resultsTitle {
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 720;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.resultsTitle::before {
+  content: "output/";
 }
 
 .resultsCount {
   margin-left: 8px;
-  color: var(--muted-dim);
-  font-size: 11px;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 9px;
 }
 
 .copyAll {
-  padding: 8px 11px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: var(--surface-raised);
-  color: var(--muted);
+  min-height: 26px;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
   cursor: pointer;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 700;
+  font-family: var(--mono);
+  font-size: 9px;
+}
+
+.copyAll:hover {
+  background: var(--surface-hover);
+  color: var(--text);
 }
 
 .copyAll:disabled {
-  opacity: 0.4;
+  color: var(--dim);
   cursor: not-allowed;
 }
 
 .list {
-  max-height: 520px;
+  max-height: 480px;
   margin: 0;
   padding: 0;
   overflow: auto;
@@ -58,11 +69,17 @@
 }
 
 .list li {
-  padding: 11px 18px;
+  min-height: 34px;
+  padding: 7px 12px;
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  gap: 10px;
-  border-bottom: 1px solid var(--border);
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.list li:hover {
+  background: var(--surface);
 }
 
 .list li:last-child {
@@ -70,22 +87,26 @@
 }
 
 .list span {
-  color: var(--muted-dim);
-  font-size: 10px;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 9px;
 }
 
 .list code {
   overflow-wrap: anywhere;
   color: var(--text);
-  font-size: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
 }
 
 .empty,
 .error {
+  min-height: 100px;
   margin: 0;
-  padding: 28px 18px;
-  color: var(--muted);
-  font-size: 12px;
+  padding: 26px 14px;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 10px;
 }
 
 .error {

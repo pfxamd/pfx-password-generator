@@ -35,7 +35,7 @@ export function PasswordGenerator() {
     <div className={form.toolGrid}>
       <div className={form.primary}>
         <OutputCard
-          label="Generated password"
+          label="password"
           value={snapshot?.value ?? ""}
           error={error}
           onRegenerate={regenerate}
@@ -43,16 +43,14 @@ export function PasswordGenerator() {
 
         <section className={form.panel}>
           <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>Password settings</h2>
-            <p className={form.panelHint}>
-              Changes regenerate immediately using the same core API.
-            </p>
+            <h2 className={form.panelTitle}>input</h2>
+            <p className={form.panelHint}>changes regenerate immediately</p>
           </div>
 
           <div className={form.field}>
             <label className={form.fieldLabel} htmlFor="password-length">
-              <span>Length</span>
-              <span>1–4096</span>
+              <span>length</span>
+              <span>1..4096</span>
             </label>
             <div className={form.rangeRow}>
               <input
@@ -82,29 +80,29 @@ export function PasswordGenerator() {
           </div>
 
           <div className={form.field}>
-            <span className={form.fieldLabel}>Character sets</span>
+            <span className={form.fieldLabel}>alphabet</span>
             <div className={form.toggleGrid}>
               <Toggle
                 label="Lowercase"
-                description="a–z"
+                description="a-z"
                 checked={options.lowercase}
                 onChange={(value) => setBoolean("lowercase", value)}
               />
               <Toggle
                 label="Uppercase"
-                description="A–Z"
+                description="A-Z"
                 checked={options.uppercase}
                 onChange={(value) => setBoolean("uppercase", value)}
               />
               <Toggle
                 label="Numbers"
-                description="0–9"
+                description="0-9"
                 checked={options.digits}
                 onChange={(value) => setBoolean("digits", value)}
               />
               <Toggle
                 label="Symbols"
-                description="Printable ASCII"
+                description="printable ASCII"
                 checked={options.symbols}
                 onChange={(value) => setBoolean("symbols", value)}
               />
@@ -113,8 +111,8 @@ export function PasswordGenerator() {
 
           <div className={form.field}>
             <Toggle
-              label="Exclude ambiguous characters"
-              description="Removes 0 O 1 l I"
+              label="Exclude ambiguous"
+              description="0 O 1 l I"
               checked={options.excludeAmbiguous ?? false}
               onChange={(value) => setBoolean("excludeAmbiguous", value)}
             />
@@ -122,14 +120,14 @@ export function PasswordGenerator() {
 
           <div className={form.field}>
             <label className={form.fieldLabel} htmlFor="excluded-characters">
-              Exclude specific characters
+              exclude characters
             </label>
             <input
               id="excluded-characters"
               className={form.input}
               type="text"
               value={options.excludedCharacters ?? ""}
-              placeholder={"Example: {}[]\"'"}
+              placeholder={"{}[]\"'"}
               onChange={(event) =>
                 setOptions((current) => ({
                   ...current,
@@ -140,9 +138,7 @@ export function PasswordGenerator() {
           </div>
 
           <details className={form.details}>
-            <summary className={form.summary}>
-              Minimum composition rules
-            </summary>
+            <summary className={form.summary}>minimum composition</summary>
             <div className={form.minimumGrid}>
               {[
                 ["minLowercase", "Lowercase minimum", options.lowercase],
@@ -186,40 +182,32 @@ export function PasswordGenerator() {
         </section>
       </div>
 
-      <aside className={form.sidebar}>
+      <aside className={form.sidebar} aria-label="Generation diagnostics">
         <div className={form.metricGrid}>
           <MetricCard
-            label="Generation entropy"
+            label="entropy"
             value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
-            detail="Calculated from the exact generation space."
+            detail="exact generation entropy"
           />
           <MetricCard
-            label="Search space"
+            label="search space"
             value={
               snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
             }
-            detail="Exact combinations before display formatting."
+            detail="exact combinations"
           />
         </div>
 
         <section className={form.panel}>
           <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>Generation model</h2>
+            <h2 className={form.panelTitle}>runtime</h2>
           </div>
           <p className={form.note}>
-            <span className={form.noteStrong}>Web Crypto</span> provides the
-            random source. Minimum rules are sampled uniformly from the valid
-            search space rather than injected and shuffled afterward.
-          </p>
-        </section>
-
-        <section className={form.panel}>
-          <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>Privacy</h2>
-          </div>
-          <p className={form.note}>
-            Generated values stay in this tab. The app does not send, save, or
-            log secrets.
+            source <span className={form.noteStrong}>Web Crypto</span>
+            <br />
+            scope <span className={form.noteStrong}>this tab</span>
+            <br />
+            persistence <span className={form.noteStrong}>none</span>
           </p>
         </section>
       </aside>

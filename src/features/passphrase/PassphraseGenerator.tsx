@@ -35,7 +35,7 @@ export function PassphraseGenerator() {
     <div className={form.toolGrid}>
       <div className={form.primary}>
         <OutputCard
-          label="Generated passphrase"
+          label="passphrase"
           value={snapshot?.value ?? ""}
           error={error}
           onRegenerate={regenerate}
@@ -43,17 +43,13 @@ export function PassphraseGenerator() {
 
         <section className={form.panel}>
           <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>Wordlist</h2>
-            <p className={form.panelHint}>
-              Paste one word per line or load a plain-text file. Nothing is
-              uploaded.
-            </p>
+            <h2 className={form.panelTitle}>wordlist</h2>
+            <p className={form.panelHint}>{parsed.words.length} unique words</p>
           </div>
 
           <div className={form.field}>
             <label className={form.fieldLabel} htmlFor="wordlist">
-              <span>Words</span>
-              <span>{parsed.words.length} unique</span>
+              words · one per line
             </label>
             <textarea
               id="wordlist"
@@ -63,7 +59,7 @@ export function PassphraseGenerator() {
               onChange={(event) => setWordlistText(event.target.value)}
             />
             <label className={form.fieldLabel} htmlFor="wordlist-file">
-              Load text file
+              load local text file
             </label>
             <input
               id="wordlist-file"
@@ -77,45 +73,45 @@ export function PassphraseGenerator() {
 
         <section className={form.panel}>
           <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>Passphrase settings</h2>
+            <h2 className={form.panelTitle}>input</h2>
           </div>
 
-          <div className={form.field}>
-            <label className={form.fieldLabel} htmlFor="word-count">
-              Word count
+          <div className={form.minimumGrid}>
+            <label className={form.field}>
+              <span className={form.fieldLabel}>word count</span>
+              <input
+                id="word-count"
+                className={form.input}
+                type="number"
+                aria-label="Word count"
+                min="1"
+                max="4096"
+                value={options.wordCount}
+                onChange={(event) =>
+                  setOptions((current) => ({
+                    ...current,
+                    wordCount: Number(event.target.value),
+                  }))
+                }
+              />
             </label>
-            <input
-              id="word-count"
-              className={form.input}
-              type="number"
-              min="1"
-              max="4096"
-              value={options.wordCount}
-              onChange={(event) =>
-                setOptions((current) => ({
-                  ...current,
-                  wordCount: Number(event.target.value),
-                }))
-              }
-            />
-          </div>
 
-          <div className={form.field}>
-            <label className={form.fieldLabel} htmlFor="separator">
-              Separator
+            <label className={form.field}>
+              <span className={form.fieldLabel}>separator</span>
+              <input
+                id="separator"
+                className={form.input}
+                type="text"
+                aria-label="Separator"
+                value={options.separator}
+                onChange={(event) =>
+                  setOptions((current) => ({
+                    ...current,
+                    separator: event.target.value,
+                  }))
+                }
+              />
             </label>
-            <input
-              id="separator"
-              className={form.input}
-              type="text"
-              value={options.separator}
-              onChange={(event) =>
-                setOptions((current) => ({
-                  ...current,
-                  separator: event.target.value,
-                }))
-              }
-            />
           </div>
 
           <div className={form.field}>
@@ -155,14 +151,14 @@ export function PassphraseGenerator() {
         </section>
       </div>
 
-      <aside className={form.sidebar}>
+      <aside className={form.sidebar} aria-label="Passphrase diagnostics">
         <div className={form.metricGrid}>
           <MetricCard
-            label="Generation entropy"
+            label="entropy"
             value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
           />
           <MetricCard
-            label="Search space"
+            label="search space"
             value={
               snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
             }
@@ -171,19 +167,17 @@ export function PassphraseGenerator() {
 
         <section className={form.panel}>
           <div className={form.panelHeader}>
-            <h2 className={form.panelTitle}>External wordlist</h2>
+            <h2 className={form.panelTitle}>wordlist state</h2>
           </div>
           <p className={form.note}>
-            This app intentionally ships without a bundled wordlist. You choose
-            the source and license of the words used for generation.
+            source <span className={form.noteStrong}>local input</span>
+            <br />
+            bundled list <span className={form.noteStrong}>none</span>
           </p>
           {parsed.duplicateCount > 0 ? (
             <p className={form.note}>
               {parsed.duplicateCount}{" "}
-              {parsed.duplicateCount === 1
-                ? "duplicate entry was"
-                : "duplicate entries were"}{" "}
-              ignored.
+              {parsed.duplicateCount === 1 ? "duplicate ignored" : "duplicates ignored"}
             </p>
           ) : null}
         </section>

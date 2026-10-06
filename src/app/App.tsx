@@ -11,35 +11,32 @@ export function App() {
 
   return (
     <div className={styles.shell}>
-      <header className={styles.header}>
+      <header className={styles.topbar}>
         <a
           className={styles.brand}
-          href="/"
+          href={import.meta.env.BASE_URL}
           aria-label="PFx Password Generator"
         >
-          <span className={styles.brandMark}>PFx</span>
-          <span>Password Generator</span>
+          <span className={styles.prompt} aria-hidden="true">
+            ~/pfx
+          </span>
+          <h1>password generator</h1>
         </a>
 
-        <div className={styles.localBadge}>
-          <span className={styles.localDot} aria-hidden="true" />
-          Local only
+        <div className={styles.runtime} aria-label="Runtime status">
+          <span>
+            <i aria-hidden="true" />
+            local
+          </span>
+          <span>web crypto</span>
         </div>
       </header>
 
-      <main className={styles.main}>
-        <section className={styles.intro} aria-labelledby="page-title">
-          <p className={styles.eyebrow}>Secure generation toolkit</p>
-          <h1 id="page-title">
-            Generate secrets without sending them anywhere.
-          </h1>
-          <p className={styles.lead}>
-            Passwords and passphrases are generated in this browser with Web
-            Crypto through pfx-password-core.
-          </p>
-        </section>
-
-        <ToolTabs value={mode} onChange={setMode} />
+      <main className={styles.workspace}>
+        <div className={styles.commandbar}>
+          <ToolTabs value={mode} onChange={setMode} />
+          <span className={styles.version}>app 0.1.0 · core 0.1.1</span>
+        </div>
 
         <div
           className={styles.toolStage}
@@ -54,9 +51,9 @@ export function App() {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <span>pfx-password-core v0.1.1</span>
-        <span>No accounts · No telemetry · No secret storage</span>
+      <footer className={styles.statusbar}>
+        <span>client-side only</span>
+        <span>no history · no telemetry · no secret storage</span>
       </footer>
     </div>
   );
