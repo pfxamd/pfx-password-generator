@@ -77,7 +77,7 @@ test.describe("release audit", () => {
     await page.goto("/");
 
     await page.getByLabel("Password length", { exact: true }).fill("2");
-    await page.getByText("Minimum composition rules").click();
+    await page.getByText("minimum composition").click();
     await page.getByLabel("Lowercase minimum").fill("2");
     await page.getByLabel("Uppercase minimum").fill("2");
 
@@ -92,7 +92,7 @@ test.describe("release audit", () => {
     await page.goto("/");
     await page.getByRole("tab", { name: "Passphrase" }).click();
 
-    await page.getByLabel("Load text file").setInputFiles({
+    await page.getByLabel("load local text file").setInputFiles({
       name: "words.txt",
       mimeType: "text/plain",
       buffer: Buffer.from(
@@ -102,7 +102,7 @@ test.describe("release audit", () => {
 
     await expect(page.getByText("6 unique")).toBeVisible();
     await expect(
-      page.getByText("1 duplicate entry was ignored."),
+      page.getByText("1 duplicate ignored"),
     ).toBeVisible();
     await expect(page.getByTestId("secret-output")).toContainText("-");
 
@@ -183,7 +183,7 @@ test.describe("release audit", () => {
       await page.getByRole("tab", { name: mode }).click();
 
       if (mode === "Password") {
-        await page.getByText("Minimum composition rules").click();
+        await page.getByText("minimum composition").click();
       }
 
       const controls = page.locator(
