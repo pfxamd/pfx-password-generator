@@ -7,16 +7,16 @@
 .topbar,
 .workspace,
 .footer {
-  width: min(960px, calc(100% - 32px));
+  width: min(1320px, calc(100% - 48px));
   margin-inline: auto;
 }
 
 .topbar {
-  min-height: 76px;
+  min-height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 24px;
 }
 
 .brand {
@@ -32,18 +32,17 @@
   place-items: center;
   width: 42px;
   height: 42px;
-  border-radius: 14px;
-  background: var(--text);
+  border-radius: 13px;
+  background: var(--ink);
   color: white;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 850;
   letter-spacing: -0.02em;
 }
 
 .brandName {
-  margin: 0;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
 }
 
@@ -53,35 +52,219 @@
   gap: 8px;
   color: var(--muted);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .localBadge > span {
   width: 8px;
   height: 8px;
-  border-radius: 999px;
+  border-radius: 50%;
   background: var(--good);
-  box-shadow: 0 0 0 4px rgba(25, 160, 117, 0.11);
+  box-shadow: 0 0 0 4px rgba(34, 183, 128, 0.12);
 }
 
 .workspace {
-  display: flex;
-  align-items: flex-start;
-  padding: 28px 0 56px;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(360px, 0.88fr) minmax(580px, 1.12fr);
+  gap: clamp(44px, 6vw, 96px);
+  align-items: center;
+  padding: 18px 0 28px;
+}
+
+.showcase {
+  min-width: 0;
+  align-self: center;
+}
+
+.kicker {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.showcase h1 {
+  margin: 0;
+  max-width: 620px;
+  color: var(--ink);
+  font-size: clamp(46px, 5.4vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.lead {
+  margin: 22px 0 0;
+  max-width: 520px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.visual {
+  position: relative;
+  width: min(470px, 92%);
+  aspect-ratio: 1.35;
+  margin-top: 32px;
+  overflow: hidden;
+  border-radius: 42px;
+  background:
+    radial-gradient(circle at 25% 24%, rgba(255, 255, 255, 0.94), transparent 25%),
+    linear-gradient(145deg, #e9efff 0%, #dce8ff 44%, #eafbd9 100%);
+  box-shadow: inset 0 0 0 1px rgba(30, 65, 110, 0.06);
+}
+
+.orbit {
+  position: absolute;
+  inset: 17% 13%;
+  border: 2px dashed rgba(26, 103, 255, 0.16);
+  border-radius: 50%;
+  transform: rotate(-8deg);
+}
+
+.shield {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  width: 178px;
+  height: 198px;
+  transform: translate(-50%, -50%);
+  border-radius: 42% 42% 48% 48% / 28% 28% 58% 58%;
+  background: linear-gradient(160deg, #1f73ff 0%, #315df4 55%, #5e55f8 100%);
+  box-shadow:
+    0 28px 48px rgba(50, 91, 225, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.lockShackle {
+  position: absolute;
+  left: 50%;
+  top: 52px;
+  width: 62px;
+  height: 52px;
+  transform: translateX(-50%);
+  border: 10px solid white;
+  border-bottom: 0;
+  border-radius: 32px 32px 0 0;
+}
+
+.lockBody {
+  position: absolute;
+  left: 50%;
+  top: 94px;
+  width: 94px;
+  height: 74px;
+  transform: translateX(-50%);
+  border-radius: 21px;
+  background: white;
+}
+
+.lockBody span {
+  position: absolute;
+  left: 50%;
+  top: 22px;
+  width: 11px;
+  height: 26px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #2a52dd;
+}
+
+.token {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 17px;
+  background: white;
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 900;
+  box-shadow: 0 14px 30px rgba(35, 55, 92, 0.12);
+}
+
+.tokenA {
+  left: 12%;
+  top: 20%;
+  transform: rotate(-9deg);
+}
+
+.tokenB {
+  right: 13%;
+  top: 18%;
+  transform: rotate(8deg);
+  background: #d9fb75;
+}
+
+.tokenC {
+  left: 15%;
+  bottom: 15%;
+  transform: rotate(7deg);
+  background: #ffd96b;
+}
+
+.tokenD {
+  right: 13%;
+  bottom: 17%;
+  transform: rotate(-8deg);
+  background: #ffd9e4;
+}
+
+.spark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+}
+
+.spark::before,
+.spark::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.spark::before {
+  left: 8px;
+  top: 0;
+  width: 2px;
+  height: 18px;
+}
+
+.spark::after {
+  left: 0;
+  top: 8px;
+  width: 18px;
+  height: 2px;
+}
+
+.sparkOne {
+  right: 26%;
+  top: 8%;
+}
+
+.sparkTwo {
+  left: 8%;
+  top: 54%;
+  transform: scale(0.72);
 }
 
 .tool {
-  width: 100%;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 28px;
-  background: var(--surface);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.96);
   box-shadow: var(--shadow);
 }
 
 .toolHeader {
-  min-height: 72px;
-  padding: 0 26px;
+  min-height: 68px;
+  padding: 0 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,12 +275,16 @@
 .version {
   color: var(--muted);
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 700;
+}
+
+.toolPanel {
+  min-height: 0;
 }
 
 .footer {
-  min-height: 66px;
-  padding: 18px 0 24px;
+  min-height: 50px;
+  padding: 12px 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -106,15 +293,89 @@
   font-size: 12px;
 }
 
-@media (max-width: 680px) {
-  .topbar,
-  .workspace,
-  .footer {
-    width: min(100% - 20px, 960px);
+@media (min-width: 901px) and (min-height: 720px) {
+  .shell {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
   }
 
   .topbar {
-    min-height: 64px;
+    min-height: 62px;
+  }
+
+  .workspace {
+    height: 100%;
+    padding: 6px 0 10px;
+  }
+
+  .visual {
+    width: min(430px, 88%);
+    margin-top: 24px;
+  }
+
+  .tool {
+    max-height: calc(100dvh - 118px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .toolHeader {
+    min-height: 58px;
+    flex: 0 0 auto;
+  }
+
+  .toolPanel {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 110, 130, 0.24) transparent;
+  }
+
+  .footer {
+    min-height: 42px;
+    padding: 8px 0 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .topbar,
+  .workspace,
+  .footer {
+    width: min(100% - 24px, 860px);
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 12px;
+  }
+
+  .showcase {
+    text-align: center;
+  }
+
+  .showcase h1,
+  .lead {
+    margin-inline: auto;
+  }
+
+  .visual {
+    width: min(460px, 100%);
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .topbar,
+  .workspace,
+  .footer {
+    width: min(100% - 20px, 860px);
+  }
+
+  .topbar {
+    min-height: 60px;
   }
 
   .brandName {
@@ -126,11 +387,50 @@
   }
 
   .workspace {
-    padding-top: 14px;
+    gap: 20px;
+  }
+
+  .showcase h1 {
+    font-size: clamp(42px, 13vw, 58px);
+  }
+
+  .lead {
+    margin-top: 16px;
+    font-size: 15px;
+  }
+
+  .visual {
+    margin-top: 22px;
+    border-radius: 30px;
+  }
+
+  .shield {
+    width: 138px;
+    height: 154px;
+  }
+
+  .lockShackle {
+    top: 40px;
+    width: 50px;
+    height: 42px;
+    border-width: 8px;
+  }
+
+  .lockBody {
+    top: 74px;
+    width: 76px;
+    height: 60px;
+  }
+
+  .token {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    font-size: 18px;
   }
 
   .tool {
-    border-radius: 22px;
+    border-radius: 24px;
   }
 
   .toolHeader {
@@ -148,46 +448,5 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
-  }
-}
-
-@media (min-width: 821px) and (min-height: 720px) {
-  .shell {
-    height: 100dvh;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .topbar {
-    min-height: 60px;
-  }
-
-  .workspace {
-    min-height: 0;
-    padding: 8px 0 10px;
-    align-items: stretch;
-  }
-
-  .tool {
-    min-height: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .toolHeader {
-    min-height: 58px;
-    flex: 0 0 auto;
-  }
-
-  .tool > [role="tabpanel"] {
-    min-height: 0;
-    flex: 1 1 auto;
-    overflow: hidden;
-  }
-
-  .footer {
-    min-height: 42px;
-    padding: 9px 0 11px;
   }
 }

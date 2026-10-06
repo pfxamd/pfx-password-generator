@@ -36,45 +36,46 @@ export function OutputCard({
 
   return (
     <section className={styles.card} aria-live="polite">
-      <div className={styles.header}>
+      <div className={styles.labelRow}>
         <span>{label}</span>
-        <div className={styles.actions}>
-          <button
-            type="button"
-            onClick={onRegenerate}
-            className={styles.action}
-          >
-            Regenerate
-          </button>
-          <button
-            type="button"
-            onClick={copy}
-            className={styles.copy}
-            disabled={!value}
-            aria-live="polite"
-          >
-            {copyState === "copied"
-              ? "Copied"
-              : copyState === "failed"
-                ? "Copy failed"
-                : "Copy"}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onRegenerate}
+          className={styles.regenerate}
+        >
+          Regenerate
+        </button>
       </div>
 
-      {error ? (
-        <p className={styles.error} role="alert">
-          {error}
-        </p>
-      ) : (
-        <output
-          className={styles.value}
-          data-testid="secret-output"
-          aria-label={label}
+      <div className={styles.resultRow}>
+        {error ? (
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+        ) : (
+          <output
+            className={styles.value}
+            data-testid="secret-output"
+            aria-label={label}
+          >
+            {value}
+          </output>
+        )}
+
+        <button
+          type="button"
+          onClick={copy}
+          className={styles.copy}
+          disabled={!value}
+          aria-live="polite"
         >
-          {value}
-        </output>
-      )}
+          {copyState === "copied"
+            ? "Copied"
+            : copyState === "failed"
+              ? "Copy failed"
+              : "Copy"}
+        </button>
+      </div>
     </section>
   );
 }

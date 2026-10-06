@@ -18,26 +18,54 @@ export function App() {
           aria-label="PFx Password Generator"
         >
           <span className={styles.brandMark}>PFx</span>
-          <h1 className={styles.brandName}>Password Generator</h1>
+          <span className={styles.brandName}>Password Generator</span>
         </a>
 
         <span className={styles.localBadge}>
           <span aria-hidden="true" />
-          Runs locally
+          Local only
         </span>
       </header>
 
       <main className={styles.workspace}>
-        <section className={styles.tool}>
+        <section className={styles.showcase} aria-labelledby="page-title">
+          <div>
+            <p className={styles.kicker}>Private by design</p>
+            <h1 id="page-title">Password Generator</h1>
+            <p className={styles.lead}>
+              Create strong random passwords in your browser. Nothing is sent
+              anywhere.
+            </p>
+          </div>
+
+          <div className={styles.visual} aria-hidden="true">
+            <div className={styles.orbit} />
+            <span className={styles.token + " " + styles.tokenA}>A</span>
+            <span className={styles.token + " " + styles.tokenB}>7</span>
+            <span className={styles.token + " " + styles.tokenC}>#</span>
+            <span className={styles.token + " " + styles.tokenD}>a</span>
+            <span className={styles.spark + " " + styles.sparkOne} />
+            <span className={styles.spark + " " + styles.sparkTwo} />
+            <div className={styles.shield}>
+              <span className={styles.lockShackle} />
+              <span className={styles.lockBody}>
+                <span />
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.tool} aria-label="Generator">
           <div className={styles.toolHeader}>
             <ToolTabs value={mode} onChange={setMode} />
             <span className={styles.version}>v0.1.0</span>
           </div>
 
           <div
-            id={`generator-panel-${mode}`}
+            className={styles.toolPanel}
+            id={"generator-panel-" + mode}
             role="tabpanel"
-            aria-labelledby={`generator-tab-${mode}`}
+            aria-labelledby={"generator-tab-" + mode}
             tabIndex={0}
           >
             {mode === "password" ? <PasswordGenerator /> : null}
@@ -48,7 +76,7 @@ export function App() {
       </main>
 
       <footer className={styles.footer}>
-        <span>Powered by pfx-password-core v0.1.1</span>
+        <span>pfx-password-core v0.1.1</span>
         <span>No accounts · No telemetry · No secret storage</span>
       </footer>
     </div>
