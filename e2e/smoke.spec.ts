@@ -14,6 +14,29 @@ test("password mode generates in the browser", async ({ page }) => {
 
   await page.getByRole("button", { name: "Regenerate" }).click();
   await expect(output).toHaveText(/^.{20}$/u);
+
+  await page.screenshot({
+    path: "test-results/password-desktop.png",
+    fullPage: true,
+  });
+});
+
+test("password mode remains usable on a phone viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+
+  await expect(
+    page.getByRole("heading", {
+      name: "Generate secrets without sending them anywhere.",
+    }),
+  ).toBeVisible();
+
+  await expect(page.getByTestId("secret-output")).toHaveText(/^.{20}$/u);
+
+  await page.screenshot({
+    path: "test-results/password-mobile.png",
+    fullPage: true,
+  });
 });
 
 test("passphrase mode accepts a local wordlist", async ({ page }) => {
