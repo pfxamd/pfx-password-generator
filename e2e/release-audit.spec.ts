@@ -45,19 +45,24 @@ test.describe("release audit", () => {
     expect(requests).toEqual([]);
   });
 
-  test("long passwords stay single-line at a fixed field height", async ({
+  test("long passwords use an anchored full-value preview without layout growth", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1536, height: 864 });
     await page.goto("/");
 
     const output = page.getByTestId("secret-output");
+    const previewTrigger = page.getByTestId("secret-preview-trigger");
+    const preview = page.getByTestId("secret-preview");
     const initialHeight = await output.evaluate(
       (element) => element.getBoundingClientRect().height,
     );
 
+    await expect(previewTrigger).toHaveCount(0);
+
     await page.getByLabel("Password length", { exact: true }).fill("512");
     await expect(output).toHaveValue(/^.{512}$/u);
+    await expect(previewTrigger).toBeVisible();
 
     const geometry = await output.evaluate((element) => ({
       height: element.getBoundingClientRect().height,
@@ -67,6 +72,20 @@ test.describe("release audit", () => {
 
     expect(geometry.height).toBe(initialHeight);
     expect(geometry.scrollWidth).toBeGreaterThan(geometry.clientWidth);
+
+    const fullValue = await output.inputValue();
+    await previewTrigger.click();
+
+    await expect(preview).toBeVisible();
+    await expect(page.getByText("512 characters", { exact: true })).toBeVisible();
+    await expect(page.getByTestId("secret-preview-value")).toHaveText(fullValue);
+
+    await page.keyboard.press("Escape");
+    await expect(preview).toBeHidden();
+
+    await page.getByLabel("Password length", { exact: true }).fill("20");
+    await expect(output).toHaveValue(/^.{20}$/u);
+    await expect(previewTrigger).toHaveCount(0);
   });
 
   test("password invalid states are rejected visibly", async ({ page }) => {
