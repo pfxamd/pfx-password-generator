@@ -155,6 +155,7 @@ export function PasswordGenerator() {
                   <input
                     className={form.input}
                     type="number"
+                    aria-label={String(label)}
                     min="0"
                     max={options.length}
                     disabled={!enabled}
