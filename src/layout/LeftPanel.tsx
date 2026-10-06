@@ -1,8 +1,12 @@
-import styles from "./ShowcaseSection.module.css";
+import styles from "./LeftPanel.module.css";
 
-export function ShowcaseSection() {
+export function LeftPanel() {
   return (
-    <section className={styles.showcase} aria-labelledby="page-title">
+    <section
+      className={styles.leftPanel}
+      aria-labelledby="page-title"
+      data-testid="left-panel"
+    >
       <div>
         <p className={styles.kicker}>Private by design</p>
         <h1 id="page-title">PFx Password Lab</h1>

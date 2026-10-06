@@ -1,0 +1,8 @@
+.rightPanel {
+  min-width: 0;
+  align-self: center;
+}
+
+.rightPanel > * {
+  width: 100%;
+}

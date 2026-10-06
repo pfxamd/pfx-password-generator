@@ -286,6 +286,42 @@ test.describe("release audit", () => {
     expect(overflow.scrollWidth).toBeGreaterThan(overflow.clientWidth);
   });
 
+  test("layout regions stay independent when left panel content is removed", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1536, height: 864 });
+    await page.goto("/");
+
+    const topBar = page.getByTestId("top-bar");
+    const leftPanel = page.getByTestId("left-panel");
+    const rightPanel = page.getByTestId("right-panel");
+    const bottomBar = page.getByTestId("bottom-bar");
+
+    await expect(topBar).toBeVisible();
+    await expect(leftPanel).toBeVisible();
+    await expect(rightPanel).toBeVisible();
+    await expect(bottomBar).toBeVisible();
+
+    const before = await rightPanel.boundingBox();
+
+    if (!before) {
+      throw new Error("Right panel geometry is unavailable.");
+    }
+
+    await leftPanel.evaluate((element) => element.replaceChildren());
+
+    const after = await rightPanel.boundingBox();
+
+    if (!after) {
+      throw new Error("Right panel geometry after left reset is unavailable.");
+    }
+
+    expect(Math.abs(after.x - before.x)).toBeLessThanOrEqual(1);
+    expect(Math.abs(after.y - before.y)).toBeLessThanOrEqual(1);
+    expect(Math.abs(after.width - before.width)).toBeLessThanOrEqual(1);
+    expect(Math.abs(after.height - before.height)).toBeLessThanOrEqual(1);
+  });
+
   test("tool panel container keeps fixed geometry across modes and oversized content", async ({
     page,
   }) => {

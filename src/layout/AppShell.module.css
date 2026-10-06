@@ -1,0 +1,45 @@
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.workspace {
+  width: min(1320px, calc(100% - 48px));
+  min-height: 0;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(360px, 0.88fr) minmax(580px, 1.12fr);
+  gap: clamp(44px, 6vw, 96px);
+  align-items: center;
+  padding: 18px 0 28px;
+}
+
+@media (min-width: 901px) and (min-height: 720px) {
+  .shell {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .workspace {
+    height: 100%;
+    padding: 6px 0 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    width: min(100% - 24px, 860px);
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 620px) {
+  .workspace {
+    width: min(100% - 20px, 860px);
+    gap: 20px;
+  }
+}
