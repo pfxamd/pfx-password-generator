@@ -131,7 +131,7 @@ export function PasswordGenerator() {
               className={form.input}
               type="text"
               value={options.excludedCharacters ?? ""}
-              placeholder={'Example: {}[]\"\''}
+              placeholder={"Example: {}[]\"'"}
               onChange={(event) =>
                 setOptions((current) => ({
                   ...current,
