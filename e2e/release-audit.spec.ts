@@ -233,7 +233,9 @@ test.describe("release audit", () => {
     const output = page.getByTestId("secret-output");
     const initialBox = await output.boundingBox();
 
-    expect(initialBox).not.toBeNull();
+    if (!initialBox) {
+      throw new Error("Secret field geometry is unavailable.");
+    }
 
     await page
       .getByLabel("Password length", { exact: true })
@@ -244,10 +246,13 @@ test.describe("release audit", () => {
       .toBe(4096);
 
     const longBox = await output.boundingBox();
-    expect(longBox).not.toBeNull();
 
-    expect(Math.abs(longBox!.height - initialBox!.height)).toBeLessThanOrEqual(1);
-    expect(Math.abs(longBox!.width - initialBox!.width)).toBeLessThanOrEqual(1);
+    if (!longBox) {
+      throw new Error("Long secret field geometry is unavailable.");
+    }
+
+    expect(Math.abs(longBox.height - initialBox.height)).toBeLessThanOrEqual(1);
+    expect(Math.abs(longBox.width - initialBox.width)).toBeLessThanOrEqual(1);
 
     const overflow = await output.evaluate((element) => ({
       clientHeight: element.clientHeight,
