@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 22
+          package-manager-cache: false
 
       - name: Use npm 11
         run: npm install --global npm@11.19.0
@@ -41,6 +42,7 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 22
+          package-manager-cache: false
 
       - name: Use npm 11
         run: npm install --global npm@11.19.0
