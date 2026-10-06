@@ -89,7 +89,6 @@ summary:focus-visible,
   color: var(--text);
 }
 
-
 @media (min-width: 821px) and (min-height: 720px) {
   html,
   body,
