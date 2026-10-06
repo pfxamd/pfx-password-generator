@@ -3,7 +3,11 @@
   overflow: hidden;
   border-radius: 22px;
   background:
-    radial-gradient(circle at 92% 0%, rgba(99, 91, 255, 0.35), transparent 18rem),
+    radial-gradient(
+      circle at 92% 0%,
+      rgba(99, 91, 255, 0.35),
+      transparent 18rem
+    ),
     linear-gradient(145deg, #17181b, #202228);
   color: white;
 }
