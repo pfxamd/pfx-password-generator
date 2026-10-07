@@ -53,7 +53,10 @@ export function OutputCard({
         <div className={styles.actions}>
           <button
             type="button"
-            onClick={onRegenerate}
+            onClick={() => {
+              onRegenerate();
+              window.dispatchEvent(new Event("pfx:generate"));
+            }}
             className={styles.regenerate}
           >
             Regenerate

@@ -22,6 +22,7 @@ export function BatchGenerator() {
     try {
       setValues(createPasswordBatch(count, options));
       setPage(0);
+      window.dispatchEvent(new Event("pfx:generate"));
       setError(null);
     } catch (generationError) {
       setValues([]);
