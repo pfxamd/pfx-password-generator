@@ -40,7 +40,7 @@ export function PassphraseGenerator() {
         onRegenerate={regenerate}
       />
 
-      <div className={form.toolGrid}>
+      <div className={`${form.toolGrid} ${form.passphraseGrid}`}>
         <div className={form.primary}>
           <section className={form.panel}>
             <div className={form.panelHeader}>

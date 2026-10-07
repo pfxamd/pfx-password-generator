@@ -303,3 +303,146 @@
     margin-inline: 16px;
   }
 }
+
+/* A bounded desktop control surface: natural rows, no stretched controls. */
+.passwordGrid {
+  max-width: none;
+  padding-top: 4px;
+}
+.passwordGrid .primary {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.passwordControls .panelHeader {
+  margin-bottom: 18px;
+}
+.exclusionsPanel {
+  padding-left: 22px;
+  border-left: 1px solid var(--line);
+}
+.exclusionsPanel h2 {
+  margin-bottom: 18px;
+}
+.passwordGrid .field + .field {
+  margin-top: 16px;
+}
+.passwordGrid .toggleGrid {
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+.resultDetails {
+  margin-bottom: 18px;
+  padding-block: 10px;
+}
+.resultDetails .metricGrid {
+  gap: 24px;
+}
+.resultDetails .metricGrid > * {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.resultDetails .metricGrid > * > span {
+  margin: 0;
+}
+.advancedButton {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface-soft);
+  color: var(--accent-ink);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.exclusionsPanel > .advancedButton {
+  margin-top: 18px;
+}
+.advancedDialog {
+  width: min(480px, calc(100vw - 32px));
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.advancedDialog::backdrop {
+  background: rgba(14, 34, 52, 0.24);
+}
+.dialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.minimumGrid .field {
+  margin-top: 0;
+}
+@media (max-width: 620px) {
+  .passwordGrid .primary {
+    grid-template-columns: 1fr;
+  }
+  .exclusionsPanel {
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+@media (min-width: 901px) and (max-height: 800px) {
+  .passwordGrid .toggleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .passwordGrid .primary {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 16px;
+  }
+  .exclusionsPanel {
+    padding-left: 16px;
+  }
+  .passwordGrid .toggleGrid label {
+    padding-inline: 8px;
+    gap: 6px;
+  }
+}
+
+@media (min-width: 901px) {
+  .passphraseGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .passphraseGrid .primary {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 20px;
+  }
+  .passphraseGrid .textarea {
+    min-height: 110px;
+    max-height: 110px;
+    resize: none;
+  }
+  .passphraseGrid .sidebar .metricGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .passphraseGrid .sidebar .metricGrid > * {
+    min-height: 0;
+    padding: 8px 0;
+  }
+}
+
+@media (min-width: 901px) {
+  .batchGrid {
+    grid-template-columns: 1fr;
+    padding-top: 18px;
+    gap: 16px;
+  }
+  .batchGrid .primary {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  .batchGrid .toggleGrid {
+    grid-template-columns: 1fr;
+  }
+}

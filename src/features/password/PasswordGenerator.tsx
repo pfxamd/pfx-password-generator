@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { MetricCard } from "../../components/MetricCard";
 import { OutputCard } from "../../components/OutputCard";
@@ -12,6 +12,7 @@ import form from "../../styles/forms.module.css";
 type BooleanOption = "lowercase" | "uppercase" | "digits" | "symbols";
 
 export function PasswordGenerator() {
+  const advancedDialog = useRef<HTMLDialogElement>(null);
   const [options, setOptions] = useState<PasswordGenerationOptions>(
     DEFAULT_PASSWORD_OPTIONS,
   );
@@ -45,21 +46,19 @@ export function PasswordGenerator() {
           <MetricCard
             label="Generation entropy"
             value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
-            detail="Calculated from the exact generation space"
           />
           <MetricCard
             label="Search space"
             value={
               snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
             }
-            detail="Exact combinations"
           />
         </div>
       </aside>
 
       <div className={`${form.toolGrid} ${form.passwordGrid}`}>
         <div className={form.primary}>
-          <section className={form.panel}>
+          <section className={`${form.panel} ${form.passwordControls}`}>
             <div className={form.panelHeader}>
               <h2 className={form.panelTitle}>Customize</h2>
             </div>
@@ -125,8 +124,9 @@ export function PasswordGenerator() {
                 />
               </div>
             </div>
-
-            <div className={form.groupHeading}>Exclusions</div>
+          </section>
+          <section className={form.exclusionsPanel}>
+            <h2 className={form.panelTitle}>Exclusions</h2>
             <div className={form.field}>
               <Toggle
                 label="Avoid ambiguous characters"
@@ -155,10 +155,30 @@ export function PasswordGenerator() {
               />
             </div>
 
-            <details className={form.details}>
-              <summary className={form.summary}>
-                Advanced composition rules
-              </summary>
+            <button
+              type="button"
+              className={form.advancedButton}
+              onClick={() => advancedDialog.current?.showModal()}
+            >
+              Advanced composition rules
+            </button>
+            <dialog
+              ref={advancedDialog}
+              className={form.advancedDialog}
+              aria-labelledby="advanced-title"
+            >
+              <div className={form.dialogHeader}>
+                <h2 id="advanced-title" className={form.panelTitle}>
+                  Composition rules
+                </h2>
+                <button
+                  type="button"
+                  className={form.advancedButton}
+                  onClick={() => advancedDialog.current?.close()}
+                >
+                  Done
+                </button>
+              </div>
               <div className={form.minimumGrid}>
                 {[
                   ["minLowercase", "Lowercase minimum", options.lowercase],
@@ -198,7 +218,7 @@ export function PasswordGenerator() {
                   </label>
                 ))}
               </div>
-            </details>
+            </dialog>
           </section>
         </div>
       </div>

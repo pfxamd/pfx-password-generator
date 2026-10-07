@@ -8,6 +8,8 @@ import form from "../../styles/forms.module.css";
 import styles from "./BatchGenerator.module.css";
 
 export function BatchGenerator() {
+  const [page, setPage] = useState(0);
+  const pageSize = 4;
   const [count, setCount] = useState(10);
   const [options, setOptions] = useState<PasswordGenerationOptions>(
     DEFAULT_PASSWORD_OPTIONS,
@@ -19,6 +21,7 @@ export function BatchGenerator() {
   function generate() {
     try {
       setValues(createPasswordBatch(count, options));
+      setPage(0);
       setError(null);
     } catch (generationError) {
       setValues([]);
@@ -45,7 +48,7 @@ export function BatchGenerator() {
   }
 
   return (
-    <div className={form.toolGrid}>
+    <div className={`${form.toolGrid} ${form.batchGrid}`}>
       <div className={form.primary}>
         <section className={form.panel}>
           <div className={form.panelHeader}>
@@ -161,14 +164,37 @@ export function BatchGenerator() {
             <p className={styles.empty}>No batch generated yet.</p>
           ) : (
             <ol className={styles.list} aria-label="Generated passwords">
-              {values.map((value, index) => (
-                <li key={`${index}-${value}`}>
-                  <span>{index + 1}</span>
-                  <code>{value}</code>
-                </li>
-              ))}
+              {values
+                .slice(page * pageSize, (page + 1) * pageSize)
+                .map((value, index) => (
+                  <li key={`${index}-${value}`}>
+                    <span>{page * pageSize + index + 1}</span>
+                    <code>{value}</code>
+                  </li>
+                ))}
             </ol>
           )}
+          {values.length > pageSize ? (
+            <nav className={styles.pagination} aria-label="Batch result pages">
+              <button
+                type="button"
+                onClick={() => setPage(page - 1)}
+                disabled={page === 0}
+              >
+                Previous
+              </button>
+              <span>
+                {page + 1} / {Math.ceil(values.length / pageSize)}
+              </span>
+              <button
+                type="button"
+                onClick={() => setPage(page + 1)}
+                disabled={(page + 1) * pageSize >= values.length}
+              >
+                Next
+              </button>
+            </nav>
+          ) : null}
         </section>
       </div>
 

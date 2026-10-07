@@ -55,10 +55,9 @@
 }
 
 .list {
-  max-height: 330px;
   margin: 0;
   padding: 0;
-  overflow: auto;
+
   list-style: none;
 }
 
@@ -86,7 +85,9 @@
 }
 
 .list code {
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: var(--text);
   font-family: var(--mono);
   font-size: 12px;
@@ -109,4 +110,26 @@
   .row {
     grid-template-columns: 1fr;
   }
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+.pagination button {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--text);
+  cursor: pointer;
+}
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
