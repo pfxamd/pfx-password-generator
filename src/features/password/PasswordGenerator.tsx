@@ -40,14 +40,28 @@ export function PasswordGenerator() {
         onRegenerate={regenerate}
       />
 
-      <div className={form.toolGrid}>
+      <aside className={form.resultDetails} aria-label="Generation details">
+        <div className={form.metricGrid}>
+          <MetricCard
+            label="Generation entropy"
+            value={snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"}
+            detail="Calculated from the exact generation space"
+          />
+          <MetricCard
+            label="Search space"
+            value={
+              snapshot ? formatCombinations(snapshot.entropy.combinations) : "—"
+            }
+            detail="Exact combinations"
+          />
+        </div>
+      </aside>
+
+      <div className={`${form.toolGrid} ${form.passwordGrid}`}>
         <div className={form.primary}>
           <section className={form.panel}>
             <div className={form.panelHeader}>
               <h2 className={form.panelTitle}>Customize</h2>
-              <p className={form.panelHint}>
-                Adjust the password without leaving the page.
-              </p>
             </div>
 
             <div className={form.field}>
@@ -112,6 +126,7 @@ export function PasswordGenerator() {
               </div>
             </div>
 
+            <div className={form.groupHeading}>Exclusions</div>
             <div className={form.field}>
               <Toggle
                 label="Avoid ambiguous characters"
@@ -186,33 +201,6 @@ export function PasswordGenerator() {
             </details>
           </section>
         </div>
-
-        <aside className={form.sidebar} aria-label="Generation details">
-          <div className={form.metricGrid}>
-            <MetricCard
-              label="Generation entropy"
-              value={
-                snapshot ? `${formatBits(snapshot.entropy.bits)} bits` : "—"
-              }
-              detail="Calculated from the exact generation space"
-            />
-            <MetricCard
-              label="Search space"
-              value={
-                snapshot
-                  ? formatCombinations(snapshot.entropy.combinations)
-                  : "—"
-              }
-              detail="Exact combinations"
-            />
-          </div>
-
-          <p className={form.note}>
-            Generated locally with{" "}
-            <span className={form.noteStrong}>Web Crypto</span>. Nothing is sent
-            or saved.
-          </p>
-        </aside>
       </div>
     </>
   );

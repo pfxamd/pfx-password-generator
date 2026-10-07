@@ -120,3 +120,39 @@
     min-height: 48px;
   }
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions .regenerate,
+.actions .copy {
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.actions .regenerate {
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.actions .copy {
+  min-width: 74px;
+  box-shadow: none;
+}
+
+.actions button:focus-visible {
+  outline: 3px solid rgba(31, 115, 255, 0.35);
+  outline-offset: 3px;
+}
+
+@media (max-width: 620px) {
+  .actions {
+    justify-content: flex-end;
+  }
+}

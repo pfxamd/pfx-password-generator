@@ -8,7 +8,7 @@
 }
 
 .header {
-  min-height: 68px;
+  min-height: 36px;
   padding: 0 22px;
   display: flex;
   align-items: center;
@@ -35,8 +35,8 @@
   }
 
   .header {
-    min-height: 58px;
-    flex: 0 0 58px;
+    min-height: 36px;
+    flex: 0 0 36px;
   }
 
   .viewport {
@@ -55,7 +55,7 @@
   }
 
   .header {
-    min-height: 52px;
+    min-height: 36px;
     padding-inline: 14px;
   }
 }

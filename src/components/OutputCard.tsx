@@ -39,13 +39,6 @@ export function OutputCard({
     <section className={styles.card} aria-live="polite">
       <div className={styles.labelRow}>
         <span>{label}</span>
-        <button
-          type="button"
-          onClick={onRegenerate}
-          className={styles.regenerate}
-        >
-          Regenerate
-        </button>
       </div>
 
       <div className={styles.resultRow}>
@@ -57,19 +50,28 @@ export function OutputCard({
           <SecretField label={label} value={value} />
         )}
 
-        <button
-          type="button"
-          onClick={copy}
-          className={styles.copy}
-          disabled={!value}
-          aria-live="polite"
-        >
-          {copyState === "copied"
-            ? "Copied"
-            : copyState === "failed"
-              ? "Copy failed"
-              : "Copy"}
-        </button>
+        <div className={styles.actions}>
+          <button
+            type="button"
+            onClick={onRegenerate}
+            className={styles.regenerate}
+          >
+            Regenerate
+          </button>
+          <button
+            type="button"
+            onClick={copy}
+            className={styles.copy}
+            disabled={!value}
+            aria-live="polite"
+          >
+            {copyState === "copied"
+              ? "Copied"
+              : copyState === "failed"
+                ? "Copy failed"
+                : "Copy"}
+          </button>
+        </div>
       </div>
     </section>
   );

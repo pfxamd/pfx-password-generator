@@ -260,3 +260,46 @@
     grid-template-columns: minmax(0, 1fr) 72px;
   }
 }
+
+.passwordGrid {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 600px;
+}
+
+.resultDetails {
+  margin: 0 22px 24px;
+  padding: 14px 0;
+  border-block: 1px solid var(--line);
+}
+
+.resultDetails .metricGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+}
+
+.resultDetails .metricGrid > * {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+}
+
+.resultDetails .metricGrid > * + * {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+
+.groupHeading {
+  margin: 20px 0 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted-strong);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+@media (max-width: 620px) {
+  .resultDetails {
+    margin-inline: 16px;
+  }
+}
