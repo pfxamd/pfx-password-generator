@@ -55,5 +55,7 @@ test("batch mode produces the requested number of results", async ({
   await page.getByLabel("Count").fill("5");
   await page.getByRole("button", { name: "generate batch" }).click();
 
-  await expect(page.locator("ol li")).toHaveCount(5);
+  await expect(page.locator("ol li")).toHaveCount(4);
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await expect(page.locator("ol li")).toHaveCount(1);
 });
