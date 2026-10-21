@@ -7,6 +7,7 @@ export default tseslint.config(
       "dist/**",
       "coverage/**",
       "node_modules/**",
+      ".pfx-release-tools/**",
       "playwright-report/**",
       "test-results/**",
     ],

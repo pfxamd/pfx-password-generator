@@ -5,3 +5,4 @@ playwright-report/
 test-results/
 package-lock.json
 THIRD_PARTY_NOTICES.md
+.pfx-release-tools/
