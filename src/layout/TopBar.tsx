@@ -1,4 +1,9 @@
-declare const __PFX_APP_RELEASE__: { version: string; channel: string; label: string; commit: string };
+declare const __PFX_APP_RELEASE__: {
+  version: string;
+  channel: string;
+  label: string;
+  commit: string;
+};
 
 import { ToolTabs } from "../components/ToolTabs";
 import { useGeneratorMode } from "../features/generator-mode/GeneratorModeContext";
