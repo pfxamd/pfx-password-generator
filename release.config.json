@@ -1,0 +1,23 @@
+{
+  "product": "PFx Password Lab",
+  "channel": "Beta",
+  "baseline": "ecb607281332494b1e46d62b20e3fbf5e3bc98d3",
+  "baseVersion": "0.1.0",
+  "sourcePaths": [
+    "src",
+    "app",
+    "apps",
+    "public",
+    "assets",
+    "index.html",
+    "diagnostics",
+    "scripts",
+    "release.config.json",
+    "vite.config.ts",
+    "vite.config.js",
+    "package.json",
+    "package-lock.json",
+    "pnpm-lock.yaml",
+    ".github/workflows"
+  ]
+}

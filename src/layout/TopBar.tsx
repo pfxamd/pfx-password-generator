@@ -1,3 +1,5 @@
+declare const __PFX_APP_RELEASE__: { version: string; channel: string; label: string; commit: string };
+
 import { ToolTabs } from "../components/ToolTabs";
 import { useGeneratorMode } from "../features/generator-mode/GeneratorModeContext";
 import styles from "./TopBar.module.css";
@@ -10,7 +12,7 @@ export function TopBar() {
       <a
         className={styles.brand}
         href={import.meta.env.BASE_URL}
-        aria-label="PFx Password Lab Beta 0.1"
+        aria-label={"PFx Password Lab " + __PFX_APP_RELEASE__.label}
       >
         <img
           className={styles.brandLogo}
@@ -20,7 +22,7 @@ export function TopBar() {
         />
         <span className={styles.brandIdentity}>
           <span className={styles.brandName}>PFx Password Lab</span>
-          <span className={styles.betaBadge}>Beta 0.1</span>
+          <span className={styles.betaBadge}>{__PFX_APP_RELEASE__.label}</span>
         </span>
       </a>
 
