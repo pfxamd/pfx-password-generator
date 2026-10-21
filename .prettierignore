@@ -6,3 +6,4 @@ test-results/
 package-lock.json
 THIRD_PARTY_NOTICES.md
 .pfx-release-tools/
+scripts/pfx-release-loader.mjs
